@@ -15,6 +15,7 @@ return new class extends Migration
             $table->integer('duree'); // en minutes
             $table->date('date_sortie');
             $table->string('affiche')->nullable();
+            $table->string('type');
             $table->timestamps();
         });
     }

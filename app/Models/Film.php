@@ -16,6 +16,7 @@ class Film extends Model
         'duree',
         'date_sortie',
         'affiche',
+        'type',
     ];
 
     protected function casts(): array
