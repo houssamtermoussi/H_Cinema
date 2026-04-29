@@ -34,7 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/paiements', [PaiementController::class, 'store'])->name('paiements.store');
 
     // Admin routes
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function () {
         Route::resource('films', AdminFilmController::class);
         Route::resource('seances', AdminSeanceController::class);
         Route::resource('salles', AdminSalleController::class);
