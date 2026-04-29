@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { reservations as reservationRoutes } from '@/routes';
+import reservationRoutes from "@/routes/reservations";
 import { Head, useForm } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
@@ -60,14 +60,14 @@ const seats = computed(() => props.seance.salle.sieges);
                 <!-- Left: Seat Selection Map -->
                 <div class="lg:col-span-2 space-y-12">
                     <div class="text-center">
-                        <h1 class="text-4xl font-black mb-2 tracking-tighter">SÉLECTIONNEZ VOS PLACES</h1>
-                        <p class="text-zinc-500 font-medium">Salle {{ seance.salle.nom }} — {{ seance.heure_debut.substring(0, 5) }}</p>
+                        <h1 class="text-4xl font-black mb-2 tracking-tighter">SÃ‰LECTIONNEZ VOS PLACES</h1>
+                        <p class="text-zinc-500 font-medium">Salle {{ seance.salle.nom }} â€” {{ seance.heure_debut.substring(0, 5) }}</p>
                     </div>
 
                     <!-- Screen -->
                     <div class="relative py-12">
                         <div class="w-full h-2 bg-gradient-to-r from-transparent via-red-600 to-transparent rounded-full shadow-[0_0_50px_rgba(220,38,38,0.5)] mb-4"></div>
-                        <p class="text-center text-[10px] font-black text-zinc-700 tracking-[0.5em] uppercase">ÉCRAN</p>
+                        <p class="text-center text-[10px] font-black text-zinc-700 tracking-[0.5em] uppercase">Ã‰CRAN</p>
                     </div>
 
                     <!-- Seat Map Grid -->
@@ -100,7 +100,7 @@ const seats = computed(() => props.seance.salle.sieges);
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="w-6 h-6 bg-red-600 rounded-md shadow-[0_0_15px_rgba(220,38,38,0.3)]"></div>
-                            <span class="text-sm font-bold text-zinc-400">Sélectionné</span>
+                            <span class="text-sm font-bold text-zinc-400">SÃ©lectionnÃ©</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="w-6 h-6 bg-zinc-800 opacity-50 rounded-md"></div>
@@ -129,17 +129,17 @@ const seats = computed(() => props.seance.salle.sieges);
 
                         <div class="space-y-4 mb-8">
                             <div class="flex justify-between text-sm font-bold">
-                                <span class="text-zinc-500 uppercase tracking-widest text-[10px]">Places sélectionnées</span>
+                                <span class="text-zinc-500 uppercase tracking-widest text-[10px]">Places sÃ©lectionnÃ©es</span>
                                 <span class="text-white">{{ form.siege_ids.length }}</span>
                             </div>
                             <div class="flex justify-between text-sm font-bold">
                                 <span class="text-zinc-500 uppercase tracking-widest text-[10px]">Prix par place</span>
-                                <span class="text-white">{{ seance.prix }}€</span>
+                                <span class="text-white">{{ seance.prix }}â‚¬</span>
                             </div>
                             <div class="h-px bg-zinc-800 my-4"></div>
                             <div class="flex justify-between items-end">
                                 <span class="text-zinc-500 font-black uppercase tracking-widest text-xs">Total</span>
-                                <span class="text-4xl font-black text-red-500">{{ totalPrice }}€</span>
+                                <span class="text-4xl font-black text-red-500">{{ totalPrice }}â‚¬</span>
                             </div>
                         </div>
 
@@ -156,7 +156,7 @@ const seats = computed(() => props.seance.salle.sieges);
                         </button>
 
                         <p class="mt-6 text-center text-zinc-600 text-[10px] font-bold uppercase tracking-widest">
-                            Transaction sécurisée — Paiement à l'étape suivante
+                            Transaction sÃ©curisÃ©e â€” Paiement Ã  l'Ã©tape suivante
                         </p>
                     </div>
                 </div>

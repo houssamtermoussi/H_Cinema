@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { admin as adminRoutes } from '@/routes';
+import adminRoutes from "@/routes/admin";
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import InputError from '@/components/InputError.vue';
 
@@ -11,7 +11,7 @@ defineProps<{
 
 const breadcrumbs = [
     { title: 'Administration', href: '#' },
-    { title: 'Séances', href: '/admin/seances' },
+    { title: 'SÃ©ances', href: '/admin/seances' },
     { title: 'Nouvelle', href: '#' }
 ];
 
@@ -30,12 +30,12 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Programmer une séance" />
+    <Head title="Programmer une sÃ©ance" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-8 max-w-4xl mx-auto">
             <header class="mb-12">
-                <h1 class="text-4xl font-black text-white tracking-tighter mb-2">PROGRAMMER UNE SÉANCE</h1>
-                <p class="text-zinc-500 font-medium">Définissez l'horaire et le lieu pour la projection d'un film.</p>
+                <h1 class="text-4xl font-black text-white tracking-tighter mb-2">PROGRAMMER UNE SÃ‰ANCE</h1>
+                <p class="text-zinc-500 font-medium">DÃ©finissez l'horaire et le lieu pour la projection d'un film.</p>
             </header>
 
             <form @submit.prevent="submit" class="bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 p-10 rounded-[3rem] shadow-2xl space-y-8">
@@ -43,12 +43,12 @@ const submit = () => {
                     
                     <!-- Film -->
                     <div class="md:col-span-2">
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Film à projeter</label>
+                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Film Ã  projeter</label>
                         <select 
                             v-model="form.film_id" 
                             class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-white font-black focus:border-red-600 focus:ring-0 transition-all"
                         >
-                            <option value="" disabled>Sélectionnez un film</option>
+                            <option value="" disabled>SÃ©lectionnez un film</option>
                             <option v-for="film in films" :key="film.id" :value="film.id">{{ film.titre }}</option>
                         </select>
                         <InputError :message="form.errors.film_id" class="mt-2" />
@@ -69,7 +69,7 @@ const submit = () => {
 
                     <!-- Prix -->
                     <div>
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Prix de la place (€)</label>
+                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Prix de la place (â‚¬)</label>
                         <input 
                             v-model="form.prix" 
                             type="number" 
@@ -81,7 +81,7 @@ const submit = () => {
 
                     <!-- Date -->
                     <div class="md:col-span-2">
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Date de la séance</label>
+                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Date de la sÃ©ance</label>
                         <input 
                             v-model="form.date_seance" 
                             type="date" 
@@ -92,7 +92,7 @@ const submit = () => {
 
                     <!-- Heures -->
                     <div>
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Heure de début</label>
+                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Heure de dÃ©but</label>
                         <input 
                             v-model="form.heure_debut" 
                             type="time" 
@@ -122,7 +122,7 @@ const submit = () => {
                         :disabled="form.processing"
                         class="flex-[2] py-5 bg-white text-black font-black text-xl rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl disabled:opacity-50"
                     >
-                        {{ form.processing ? 'Programmation...' : 'Programmer la séance' }}
+                        {{ form.processing ? 'Programmation...' : 'Programmer la sÃ©ance' }}
                     </button>
                 </div>
             </form>

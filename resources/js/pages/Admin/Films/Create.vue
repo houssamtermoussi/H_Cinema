@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { admin as adminRoutes } from '@/routes';
+import adminRoutes from "@/routes/admin";
 import { Head, useForm } from '@inertiajs/vue3';
 import InputError from '@/components/InputError.vue';
 
@@ -23,7 +23,7 @@ const submit = () => {
     form.post(adminRoutes.films.store().url);
 };
 
-const types = ['Action', 'Comédie', 'Drame', 'Horreur', 'Science-Fiction', 'Animation', 'Documentaire'];
+const types = ['Action', 'ComÃ©die', 'Drame', 'Horreur', 'Science-Fiction', 'Animation', 'Documentaire'];
 </script>
 
 <template>
@@ -61,9 +61,9 @@ const types = ['Action', 'Comédie', 'Drame', 'Horreur', 'Science-Fiction', 'Ani
                         <InputError :message="form.errors.type" class="mt-2" />
                     </div>
 
-                    <!-- Durée -->
+                    <!-- DurÃ©e -->
                     <div>
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">Durée (minutes)</label>
+                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">DurÃ©e (minutes)</label>
                         <input 
                             v-model="form.duree" 
                             type="number" 
@@ -102,7 +102,7 @@ const types = ['Action', 'Comédie', 'Drame', 'Horreur', 'Science-Fiction', 'Ani
                             v-model="form.description" 
                             rows="5"
                             class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-white font-bold focus:border-red-600 focus:ring-0 transition-all placeholder:text-zinc-700"
-                            placeholder="Entrez le résumé du film..."
+                            placeholder="Entrez le rÃ©sumÃ© du film..."
                         ></textarea>
                         <InputError :message="form.errors.description" class="mt-2" />
                     </div>

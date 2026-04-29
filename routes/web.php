@@ -9,12 +9,29 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SeanceController;
+use App\Models\Film;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
-Route::inertia('/', 'Welcome', [
-    'canRegister' => Features::enabled(Features::registration()),
-])->name('home');
+Route::get('/', function (Request $request) {
+    $query = Film::query();
+
+    if ($request->filled('category')) {
+        $query->where('type', $request->category);
+    }
+
+    if ($request->filled('search')) {
+        $query->where('titre', 'like', '%'.$request->search.'%');
+    }
+
+    return inertia('Welcome', [
+        'canRegister' => Features::enabled(Features::registration()),
+        'films' => $query->paginate(15)->withQueryString(),
+        'filters' => $request->only(['category', 'search']),
+        'categories' => Film::select('type')->distinct()->whereNotNull('type')->pluck('type'),
+    ]);
+})->name('home');
 
 // Public Film and Session routes
 Route::get('/films', [FilmController::class, 'index'])->name('films.index');

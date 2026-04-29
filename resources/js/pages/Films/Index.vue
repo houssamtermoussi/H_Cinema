@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { films as filmRoutes } from '@/routes';
+import filmRoutes from "@/routes/films";
 import { Head, Link } from '@inertiajs/vue3';
 
 defineProps<{
@@ -17,8 +17,8 @@ const breadcrumbs = [
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-6">
             <header class="mb-8">
-                <h1 class="text-3xl font-bold text-white mb-2 tracking-tight">À l'affiche</h1>
-                <p class="text-zinc-400">Découvrez les films du moment et réservez votre séance.</p>
+                <h1 class="text-3xl font-bold text-white mb-2 tracking-tight">Ã€ l'affiche</h1>
+                <p class="text-zinc-400">DÃ©couvrez les films du moment et rÃ©servez votre sÃ©ance.</p>
             </header>
 
             <div v-if="films.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
@@ -59,7 +59,7 @@ const breadcrumbs = [
                     <svg class="w-12 h-12 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                 </div>
                 <h2 class="text-xl font-bold text-white mb-1">Aucun film disponible</h2>
-                <p class="text-zinc-500">Revenez plus tard pour voir les nouveautés.</p>
+                <p class="text-zinc-500">Revenez plus tard pour voir les nouveautÃ©s.</p>
             </div>
         </div>
     </AppLayout>

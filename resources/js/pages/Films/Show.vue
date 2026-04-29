@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { seances as seanceRoutes } from '@/routes';
+import seanceRoutes from "@/routes/seances";
 import { Head, Link } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -78,8 +78,8 @@ const getWeekday = (dateString: string) => new Date(dateString).toLocaleDateStri
                 <div class="max-w-7xl mx-auto px-8 py-24">
                     <div class="flex items-end justify-between mb-16">
                         <div>
-                            <h2 class="text-4xl font-black text-white mb-4 tracking-tight">Prochaines Séances</h2>
-                            <p class="text-zinc-500 font-medium">Sélectionnez l'horaire qui vous convient pour réserver vos places.</p>
+                            <h2 class="text-4xl font-black text-white mb-4 tracking-tight">Prochaines SÃ©ances</h2>
+                            <p class="text-zinc-500 font-medium">SÃ©lectionnez l'horaire qui vous convient pour rÃ©server vos places.</p>
                         </div>
                         <div class="hidden md:flex gap-2">
                             <div class="w-12 h-1 bg-red-600 rounded-full"></div>
@@ -97,7 +97,7 @@ const getWeekday = (dateString: string) => new Date(dateString).toLocaleDateStri
                                 </div>
                                 <div class="text-right">
                                     <h4 class="text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-1">Tarif Unique</h4>
-                                    <p class="text-3xl font-black text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.2)]">{{ seance.prix }}€</p>
+                                    <p class="text-3xl font-black text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.2)]">{{ seance.prix }}â‚¬</p>
                                 </div>
                             </div>
                             
@@ -107,13 +107,13 @@ const getWeekday = (dateString: string) => new Date(dateString).toLocaleDateStri
                                     <span class="block text-2xl font-black text-white leading-none">{{ getDay(seance.date_seance) }}</span>
                                 </div>
                                 <div>
-                                    <p class="text-white font-black text-3xl tracking-tighter mb-1">{{ seance.heure_debut.substring(0, 5) }} — {{ seance.heure_fin.substring(0, 5) }}</p>
+                                    <p class="text-white font-black text-3xl tracking-tighter mb-1">{{ seance.heure_debut.substring(0, 5) }} â€” {{ seance.heure_fin.substring(0, 5) }}</p>
                                     <p class="text-zinc-500 text-sm font-bold uppercase tracking-widest">{{ new Date(seance.date_seance).toLocaleDateString('fr-FR', { month: 'long' }) }}</p>
                                 </div>
                             </div>
                             
                             <Link :href="seanceRoutes.show(seance.id)" class="w-full flex items-center justify-center gap-3 py-5 bg-white hover:bg-red-600 text-black hover:text-white font-black text-lg rounded-2xl transition-all duration-300 shadow-lg group-active:scale-95">
-                                Réserver mes places
+                                RÃ©server mes places
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                             </Link>
                         </div>
@@ -123,8 +123,8 @@ const getWeekday = (dateString: string) => new Date(dateString).toLocaleDateStri
                         <div class="w-20 h-20 bg-zinc-900 rounded-full flex items-center justify-center mb-6">
                             <svg class="w-10 h-10 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         </div>
-                        <p class="text-zinc-500 text-2xl font-bold">Bientôt disponible</p>
-                        <p class="text-zinc-600 font-medium">Les prochaines séances arrivent très vite.</p>
+                        <p class="text-zinc-500 text-2xl font-bold">BientÃ´t disponible</p>
+                        <p class="text-zinc-600 font-medium">Les prochaines sÃ©ances arrivent trÃ¨s vite.</p>
                     </div>
                 </div>
             </div>

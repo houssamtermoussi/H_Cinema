@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { admin as adminRoutes } from '@/routes';
+import adminRoutes from "@/routes/admin";
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import InputError from '@/components/InputError.vue';
 
@@ -42,14 +42,14 @@ const submit = () => {
                 </div>
 
                 <div>
-                    <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Capacité de sièges</label>
+                    <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">CapacitÃ© de siÃ¨ges</label>
                     <input 
                         v-model="form.capacite" 
                         type="number" 
                         class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-5 text-white font-black text-2xl tracking-tight focus:border-red-600 focus:ring-0 transition-all"
                     />
                     <InputError :message="form.errors.capacite" class="mt-2" />
-                    <p class="mt-3 text-zinc-600 text-xs font-bold italic px-1">Note : Les sièges seront automatiquement générés lors de la création.</p>
+                    <p class="mt-3 text-zinc-600 text-xs font-bold italic px-1">Note : Les siÃ¨ges seront automatiquement gÃ©nÃ©rÃ©s lors de la crÃ©ation.</p>
                 </div>
 
                 <div class="pt-8 flex gap-4">
@@ -61,7 +61,7 @@ const submit = () => {
                         :disabled="form.processing"
                         class="flex-[2] py-5 bg-white text-black font-black text-xl rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl disabled:opacity-50"
                     >
-                        {{ form.processing ? 'Création...' : 'Créer la salle' }}
+                        {{ form.processing ? 'CrÃ©ation...' : 'CrÃ©er la salle' }}
                     </button>
                 </div>
             </form>

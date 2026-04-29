@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { admin as adminRoutes } from '@/routes';
+import adminRoutes from "@/routes/admin";
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import InputError from '@/components/InputError.vue';
 
@@ -27,7 +27,7 @@ const submit = () => {
     form.put(adminRoutes.films.update(props.film.id).url);
 };
 
-const types = ['Action', 'Comédie', 'Drame', 'Horreur', 'Science-Fiction', 'Animation', 'Documentaire'];
+const types = ['Action', 'ComÃ©die', 'Drame', 'Horreur', 'Science-Fiction', 'Animation', 'Documentaire'];
 </script>
 
 <template>
@@ -36,7 +36,7 @@ const types = ['Action', 'Comédie', 'Drame', 'Horreur', 'Science-Fiction', 'Ani
         <div class="p-8 max-w-4xl mx-auto">
             <header class="mb-12">
                 <h1 class="text-4xl font-black text-white tracking-tighter mb-2 uppercase">MODIFIER : {{ film.titre }}</h1>
-                <p class="text-zinc-500 font-medium">Mettez à jour les informations du film.</p>
+                <p class="text-zinc-500 font-medium">Mettez Ã  jour les informations du film.</p>
             </header>
 
             <form @submit.prevent="submit" class="bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 p-10 rounded-[2.5rem] shadow-2xl space-y-8">
@@ -64,9 +64,9 @@ const types = ['Action', 'Comédie', 'Drame', 'Horreur', 'Science-Fiction', 'Ani
                         <InputError :message="form.errors.type" class="mt-2" />
                     </div>
 
-                    <!-- Durée -->
+                    <!-- DurÃ©e -->
                     <div>
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">Durée (minutes)</label>
+                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">DurÃ©e (minutes)</label>
                         <input 
                             v-model="form.duree" 
                             type="number" 
@@ -118,7 +118,7 @@ const types = ['Action', 'Comédie', 'Drame', 'Horreur', 'Science-Fiction', 'Ani
                         :disabled="form.processing"
                         class="px-10 py-4 bg-white text-black font-black rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl disabled:opacity-50"
                     >
-                        {{ form.processing ? 'Mise à jour...' : 'Mettre à jour le film' }}
+                        {{ form.processing ? 'Mise Ã  jour...' : 'Mettre Ã  jour le film' }}
                     </button>
                 </div>
             </form>

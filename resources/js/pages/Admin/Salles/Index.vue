@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { admin as adminRoutes } from '@/routes';
+import adminRoutes from "@/routes/admin";
 import { Head, Link, router } from '@inertiajs/vue3';
 
 defineProps<{
@@ -13,7 +13,7 @@ const breadcrumbs = [
 ];
 
 const deleteSalle = (id: number) => {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette salle ? Toutes les séances et réservations associées seront impactées.')) {
+    if (confirm('ÃŠtes-vous sÃ»r de vouloir supprimer cette salle ? Toutes les sÃ©ances et rÃ©servations associÃ©es seront impactÃ©es.')) {
         router.delete(adminRoutes.salles.destroy(id).url);
     }
 };
@@ -26,7 +26,7 @@ const deleteSalle = (id: number) => {
              <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
                 <div>
                     <h1 class="text-4xl font-black text-white tracking-tighter mb-2">GESTION DES SALLES</h1>
-                    <p class="text-zinc-500 font-medium">Configurez les salles de projection et leurs capacités.</p>
+                    <p class="text-zinc-500 font-medium">Configurez les salles de projection et leurs capacitÃ©s.</p>
                 </div>
                 <Link :href="adminRoutes.salles.create().url" class="px-8 py-4 bg-white text-black font-black rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 flex items-center gap-3 shadow-xl">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
@@ -49,11 +49,11 @@ const deleteSalle = (id: number) => {
                         
                         <div class="grid grid-cols-2 gap-4 mb-10">
                             <div class="bg-zinc-950/80 p-4 rounded-2xl border border-zinc-800/50">
-                                <p class="text-zinc-600 text-[9px] font-black uppercase tracking-widest mb-1">Capacité Max</p>
+                                <p class="text-zinc-600 text-[9px] font-black uppercase tracking-widest mb-1">CapacitÃ© Max</p>
                                 <p class="text-white font-black text-2xl tracking-tighter">{{ salle.capacite }} <span class="text-xs text-zinc-500">p.</span></p>
                             </div>
                             <div class="bg-zinc-950/80 p-4 rounded-2xl border border-zinc-800/50">
-                                <p class="text-zinc-600 text-[9px] font-black uppercase tracking-widest mb-1">Configurés</p>
+                                <p class="text-zinc-600 text-[9px] font-black uppercase tracking-widest mb-1">ConfigurÃ©s</p>
                                 <p class="text-white font-black text-2xl tracking-tighter">{{ salle.sieges_count }} <span class="text-xs text-zinc-500">s.</span></p>
                             </div>
                         </div>
@@ -75,7 +75,7 @@ const deleteSalle = (id: number) => {
                     <svg class="w-10 h-10 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                 </div>
                 <p class="text-zinc-500 text-2xl font-bold uppercase tracking-tight">Aucune salle disponible</p>
-                <p class="text-zinc-600 font-medium">Commencez par créer votre première salle de cinéma.</p>
+                <p class="text-zinc-600 font-medium">Commencez par crÃ©er votre premiÃ¨re salle de cinÃ©ma.</p>
             </div>
         </div>
     </AppLayout>

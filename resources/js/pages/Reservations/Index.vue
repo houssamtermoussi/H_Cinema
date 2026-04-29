@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { reservations as reservationRoutes, paiements as paiementRoutes } from '@/routes';
+import reservationRoutes from "@/routes/reservations"; import paiementRoutes from "@/routes/paiements";
 import { Head, Link } from '@inertiajs/vue3';
 
 defineProps<{
@@ -8,7 +8,7 @@ defineProps<{
 }>();
 
 const breadcrumbs = [
-    { title: 'Mes Réservations', href: '/reservations' }
+    { title: 'Mes RÃ©servations', href: '/reservations' }
 ];
 
 const formatDate = (dateString: string) => {
@@ -21,14 +21,14 @@ const formatDate = (dateString: string) => {
 </script>
 
 <template>
-    <Head title="Mes Réservations" />
+    <Head title="Mes RÃ©servations" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="min-h-screen bg-black p-8 md:p-16">
             <div class="max-w-7xl mx-auto">
                 <header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
                     <div>
-                        <h1 class="text-5xl font-black text-white mb-4 tracking-tighter">MES RÉSERVATIONS</h1>
-                        <p class="text-zinc-500 font-bold text-lg">Retrouvez vos tickets et l'historique de vos séances.</p>
+                        <h1 class="text-5xl font-black text-white mb-4 tracking-tighter">MES RÃ‰SERVATIONS</h1>
+                        <p class="text-zinc-500 font-bold text-lg">Retrouvez vos tickets et l'historique de vos sÃ©ances.</p>
                     </div>
                     <div class="flex items-center gap-4">
                         <div class="px-6 py-3 bg-zinc-900 rounded-2xl border border-zinc-800">
@@ -83,7 +83,7 @@ const formatDate = (dateString: string) => {
                                     ]"
                                     class="px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest border"
                                 >
-                                    {{ res.statut === 'confirme' ? 'Payé' : 'À régler' }}
+                                    {{ res.statut === 'confirme' ? 'PayÃ©' : 'Ã€ rÃ©gler' }}
                                 </span>
                             </div>
                             
@@ -99,7 +99,7 @@ const formatDate = (dateString: string) => {
                                     :href="reservationRoutes.show(res.id)" 
                                     class="w-full py-3.5 bg-zinc-800 text-white text-center font-black rounded-2xl hover:bg-zinc-700 transition-all active:scale-95 border border-zinc-700/50"
                                 >
-                                    Détails & Ticket
+                                    DÃ©tails & Ticket
                                 </Link>
                             </div>
                         </div>
@@ -110,10 +110,10 @@ const formatDate = (dateString: string) => {
                     <div class="w-24 h-24 bg-zinc-900 rounded-full flex items-center justify-center mb-8">
                         <svg class="w-12 h-12 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
                     </div>
-                    <h2 class="text-2xl font-black text-white mb-2 tracking-tight">AUCUNE RÉSERVATION TROUVÉE</h2>
-                    <p class="text-zinc-500 font-medium mb-10">Il est temps de réserver votre première séance !</p>
+                    <h2 class="text-2xl font-black text-white mb-2 tracking-tight">AUCUNE RÃ‰SERVATION TROUVÃ‰E</h2>
+                    <p class="text-zinc-500 font-medium mb-10">Il est temps de rÃ©server votre premiÃ¨re sÃ©ance !</p>
                     <Link href="/films" class="px-10 py-5 bg-white text-black font-black text-xl rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-2xl">
-                        Voir les films à l'affiche
+                        Voir les films Ã  l'affiche
                     </Link>
                 </div>
             </div>

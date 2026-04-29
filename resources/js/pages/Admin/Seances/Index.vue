@@ -1,6 +1,6 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { admin as adminRoutes } from '@/routes';
+import adminRoutes from "@/routes/admin";
 import { Head, Link, router } from '@inertiajs/vue3';
 
 defineProps<{
@@ -9,11 +9,11 @@ defineProps<{
 
 const breadcrumbs = [
     { title: 'Administration', href: '#' },
-    { title: 'Séances', href: '/admin/seances' }
+    { title: 'SÃ©ances', href: '/admin/seances' }
 ];
 
 const deleteSeance = (id: number) => {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette séance ? Les réservations existantes seront perdues.')) {
+    if (confirm('ÃŠtes-vous sÃ»r de vouloir supprimer cette sÃ©ance ? Les rÃ©servations existantes seront perdues.')) {
         router.delete(adminRoutes.seances.destroy(id).url);
     }
 };
@@ -28,17 +28,17 @@ const formatDate = (dateString: string) => {
 </script>
 
 <template>
-    <Head title="Gestion des Séances" />
+    <Head title="Gestion des SÃ©ances" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-8 max-w-7xl mx-auto">
              <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
                 <div>
-                    <h1 class="text-4xl font-black text-white tracking-tighter mb-2">PLANIFICATION DES SÉANCES</h1>
-                    <p class="text-zinc-500 font-medium">Gérez la programmation des films dans vos salles.</p>
+                    <h1 class="text-4xl font-black text-white tracking-tighter mb-2">PLANIFICATION DES SÃ‰ANCES</h1>
+                    <p class="text-zinc-500 font-medium">GÃ©rez la programmation des films dans vos salles.</p>
                 </div>
                 <Link :href="adminRoutes.seances.create().url" class="px-8 py-4 bg-white text-black font-black rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 flex items-center gap-3 shadow-xl">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
-                    Nouvelle Séance
+                    Nouvelle SÃ©ance
                 </Link>
             </div>
 
@@ -69,13 +69,13 @@ const formatDate = (dateString: string) => {
                                 <td class="px-8 py-6">
                                     <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-zinc-950 border border-zinc-800 rounded-xl text-white font-bold tracking-tighter">
                                         <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                        {{ seance.heure_debut.substring(0, 5) }} — {{ seance.heure_fin.substring(0, 5) }}
+                                        {{ seance.heure_debut.substring(0, 5) }} â€” {{ seance.heure_fin.substring(0, 5) }}
                                     </div>
                                 </td>
                                 <td class="px-8 py-6">
                                     <div class="flex flex-col gap-1">
                                         <p class="text-zinc-300 font-bold">{{ seance.salle.nom }}</p>
-                                        <p class="text-red-500 font-black tracking-tight text-xl">{{ seance.prix }}€</p>
+                                        <p class="text-red-500 font-black tracking-tight text-xl">{{ seance.prix }}â‚¬</p>
                                     </div>
                                 </td>
                                 <td class="px-8 py-6 text-right">
@@ -95,7 +95,7 @@ const formatDate = (dateString: string) => {
             </div>
             
             <div v-if="seances.length === 0" class="flex flex-col items-center justify-center py-32 bg-zinc-950 rounded-[3rem] border border-dashed border-zinc-800/50 mt-8">
-                <p class="text-zinc-500 text-lg font-bold">Aucune séance planifiée.</p>
+                <p class="text-zinc-500 text-lg font-bold">Aucune sÃ©ance planifiÃ©e.</p>
             </div>
         </div>
     </AppLayout>

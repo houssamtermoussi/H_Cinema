@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
 import { BookOpen, FolderGit2, LayoutGrid, Film, Ticket, Clapperboard, Calendar, DoorOpen, ShieldCheck } from 'lucide-vue-next';
 import AppLogo from '@/components/AppLogo.vue';
@@ -14,7 +14,10 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, films, reservations, admin as adminRoutes } from '@/routes';
+import { dashboard } from '@/routes';
+import films from '@/routes/films';
+import reservations from '@/routes/reservations';
+import adminRoutes from '@/routes/admin';
 import type { NavItem } from '@/types';
 import { computed } from 'vue';
 
@@ -28,12 +31,12 @@ const mainNavItems = computed((): NavItem[] => [
         icon: LayoutGrid,
     },
     {
-        title: 'Films à l\'affiche',
+        title: 'Films Ã  l\'affiche',
         href: films.index().url,
         icon: Film,
     },
     {
-        title: 'Mes Réservations',
+        title: 'Mes RÃ©servations',
         href: reservations.index().url,
         icon: Ticket,
     },
@@ -49,7 +52,7 @@ const adminNavItems = computed((): NavItem[] => {
             icon: Clapperboard,
         },
         {
-            title: 'Planning Séances',
+            title: 'Planning SÃ©ances',
             href: adminRoutes.seances.index().url,
             icon: Calendar,
         },
@@ -59,7 +62,7 @@ const adminNavItems = computed((): NavItem[] => {
             icon: DoorOpen,
         },
         {
-            title: 'Toutes les Réservations',
+            title: 'Toutes les RÃ©servations',
             href: adminRoutes.reservations.index().url,
             icon: ShieldCheck,
         },
