@@ -57,10 +57,10 @@ const page = usePage();
 
 <template>
     <div class="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300 flex flex-col">
-        <!-- Full Width Header Wrapper -->
-        <div class="sticky top-0 z-50 w-full">
-            <header class="bg-[#cc0000]/95 backdrop-blur-md text-white rounded-b-[2rem] shadow-[0_8px_32px_rgba(204,0,0,0.25)] border-b border-white/10 transition-all duration-300">
-                <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
+        <!-- Floating Header Wrapper -->
+        <div class="sticky top-0 z-50 px-4 pt-4 md:px-8 md:pt-5">
+            <header class="bg-[#cc0000]/95 backdrop-blur-md text-white rounded-2xl shadow-[0_8px_32px_rgba(204,0,0,0.35)] border border-white/10 transition-all duration-300">
+                <div class="px-5 py-3 flex items-center justify-between">
                     <!-- Left: Logo & Title -->
                     <Link href="/" class="flex items-center gap-3 group">
                         <img src="/images/logo2.png" alt="H-Cinema Logo" class="h-9 w-auto transform group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://ui-avatars.com/api/?name=HC&background=fff&color=cc0000&rounded=true'" />
