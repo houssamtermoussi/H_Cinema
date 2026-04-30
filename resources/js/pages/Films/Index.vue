@@ -10,7 +10,6 @@ defineProps<{
 
 <template>
     <Head title="Tous les Films" />
-    <GuestLayout>
         <div class="py-12 md:py-20 bg-gray-50 dark:bg-gray-950 min-h-screen">
             <div class="max-w-7xl mx-auto px-4 md:px-8">
                 <header class="mb-12 text-center md:text-left">
@@ -60,6 +59,5 @@ defineProps<{
                 </div>
             </div>
         </div>
-    </GuestLayout>
 </template>
 

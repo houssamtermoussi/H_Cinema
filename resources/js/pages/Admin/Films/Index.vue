@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import adminRoutes from "@/routes/admin";
 import { Head, Link, router } from '@inertiajs/vue3';
@@ -7,13 +7,9 @@ defineProps<{
     films: any[];
 }>();
 
-const breadcrumbs = [
-    { title: 'Administration', href: '#' },
-    { title: 'Films', href: '/admin/films' }
-];
 
 const deleteFilm = (id: number) => {
-    if (confirm('ÃŠtes-vous sÃ»r de vouloir supprimer ce film ? Toutes les sÃ©ances associÃ©es seront Ã©galement supprimÃ©es.')) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce film ? Toutes les séances associées seront également supprimées.')) {
         router.delete(adminRoutes.films.destroy(id).url);
     }
 };
@@ -30,7 +26,7 @@ const formatDate = (dateString: string) => {
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
                 <div>
                     <h1 class="text-4xl font-black text-white tracking-tighter mb-2">GESTION DU CATALOGUE</h1>
-                    <p class="text-zinc-500 font-medium">Administrez les films disponibles Ã  l'affiche.</p>
+                    <p class="text-zinc-500 font-medium">Administrez les films disponibles à l'affiche.</p>
                 </div>
                 <Link :href="adminRoutes.films.create().url" class="px-8 py-4 bg-white text-black font-black rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 flex items-center gap-3 shadow-xl">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
@@ -44,7 +40,7 @@ const formatDate = (dateString: string) => {
                         <thead>
                             <tr class="bg-zinc-900/80 border-b border-zinc-800">
                                 <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest">Film & Poster</th>
-                                <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest">Type / DurÃ©e</th>
+                                <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest">Type / Durée</th>
                                 <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest text-right">Gestion</th>
                             </tr>
                         </thead>

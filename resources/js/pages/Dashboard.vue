@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
@@ -10,12 +10,6 @@ defineProps<{
     confirmed_bookings: number;
 }>();
 
-const breadcrumbs = [
-    {
-        title: 'Tableau de bord',
-        href: dashboard().url,
-    },
-];
 </script>
 
 <template>
@@ -27,7 +21,7 @@ const breadcrumbs = [
                 <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-[2.5rem] shadow-xl relative overflow-hidden group">
                     <div class="absolute -right-4 -top-4 w-24 h-24 bg-red-600/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                     <div class="relative z-10">
-                        <p class="text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2">Total RÃ©servations</p>
+                        <p class="text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2">Total Réservations</p>
                         <p class="text-5xl font-black text-white tracking-tighter">{{ total_bookings }}</p>
                     </div>
                 </div>
@@ -35,7 +29,7 @@ const breadcrumbs = [
                 <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-[2.5rem] shadow-xl relative overflow-hidden group">
                     <div class="absolute -right-4 -top-4 w-24 h-24 bg-green-600/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                     <div class="relative z-10">
-                        <p class="text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2">SÃ©ances ConfirmÃ©es</p>
+                        <p class="text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2">Séances Confirmées</p>
                         <p class="text-5xl font-black text-green-500 tracking-tighter">{{ confirmed_bookings }}</p>
                     </div>
                 </div>
@@ -55,7 +49,7 @@ const breadcrumbs = [
             <!-- Recent Activity -->
             <div class="space-y-6">
                 <div class="flex items-end justify-between px-2">
-                    <h2 class="text-3xl font-black text-white tracking-tighter">ACTIVITÃ‰ RÃ‰CENTE</h2>
+                    <h2 class="text-3xl font-black text-white tracking-tighter">ACTIVITÉ RÉCENTE</h2>
                     <Link :href="reservationRoutes.index().url" class="text-red-500 font-black text-sm uppercase tracking-widest hover:underline">Voir tout</Link>
                 </div>
 
@@ -69,7 +63,7 @@ const breadcrumbs = [
                                 <div>
                                     <h4 class="text-xl font-black text-white tracking-tight mb-1">{{ res.seance.film.titre }}</h4>
                                     <p class="text-zinc-500 font-bold text-xs uppercase tracking-widest">
-                                        {{ new Date(res.seance.date_seance).toLocaleDateString() }} â€¢ {{ res.seance.heure_debut.substring(0, 5) }} â€¢ {{ res.seance.salle.nom }}
+                                        {{ new Date(res.seance.date_seance).toLocaleDateString() }} • {{ res.seance.heure_debut.substring(0, 5) }} • {{ res.seance.salle.nom }}
                                     </p>
                                 </div>
                             </div>
@@ -79,7 +73,7 @@ const breadcrumbs = [
                                     :class="res.statut === 'confirme' ? 'text-green-500 bg-green-500/5 border-green-500/20' : 'text-orange-500 bg-orange-500/5 border-orange-500/20'"
                                     class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border"
                                 >
-                                    {{ res.statut === 'confirme' ? 'PayÃ©' : 'Ã€ rÃ©gler' }}
+                                    {{ res.statut === 'confirme' ? 'Payé' : 'À régler' }}
                                 </span>
                                 <Link :href="reservationRoutes.show(res.id).url" class="p-3 bg-zinc-950 text-zinc-500 hover:text-white rounded-xl border border-zinc-800 transition-all">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
@@ -91,7 +85,7 @@ const breadcrumbs = [
                     <div v-else class="p-20 text-center">
                         <p class="text-zinc-600 font-bold italic">Aucune rÃ©servation rÃ©cente.</p>
                         <Link href="/films" class="mt-6 inline-flex px-8 py-3 bg-white text-black font-black rounded-2xl hover:bg-red-600 hover:text-white transition-all">
-                            RÃ©server un film
+                            Réserver un film
                         </Link>
                     </div>
                 </div>
