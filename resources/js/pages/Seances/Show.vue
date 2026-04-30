@@ -40,8 +40,34 @@ const submit = () => {
     form.post(reservationRoutes.store());
 };
 
-// Group seats by row (assuming numero might contain row info or we can group them)
-const seats = computed(() => props.seance.salle.sieges);
+// Group seats by row (e.g., A, B, C...)
+const groupedSeats = computed(() => {
+    const groups: Record<string, any[]> = {};
+    const sieges = props.seance.salle.sieges || [];
+    
+    sieges.forEach((siege: any) => {
+        // Extract the row letter (non-digit prefix)
+        const match = siege.numero.match(/^[A-Z]+/i);
+        const row = match ? match[0].toUpperCase() : '?';
+        
+        if (!groups[row]) {
+            groups[row] = [];
+        }
+        groups[row].push(siege);
+    });
+
+    // Sort rows alphabetically and seats numerically
+    const sortedGroups: Record<string, any[]> = {};
+    Object.keys(groups).sort().forEach(key => {
+        sortedGroups[key] = groups[key].sort((a: any, b: any) => {
+            const numA = parseInt(a.numero.replace(/[^0-9]/g, '')) || 0;
+            const numB = parseInt(b.numero.replace(/[^0-9]/g, '')) || 0;
+            return numA - numB;
+        });
+    });
+    
+    return sortedGroups;
+});
 </script>
 
 <template>
@@ -64,41 +90,56 @@ const seats = computed(() => props.seance.salle.sieges);
                     </div>
 
                     <!-- Seat Map Grid -->
-                    <div class="flex flex-col items-center gap-4 overflow-x-auto pb-8 scrollbar-hide">
-                        <div class="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-12 gap-3 p-4">
-                            <button 
-                                v-for="siege in seats" 
-                                :key="siege.id"
-                                @click="toggleSeat(siege.id)"
-                                :disabled="takenSeatIds.includes(siege.id)"
-                                class="w-9 h-9 md:w-11 md:h-11 rounded-xl flex items-center justify-center text-[10px] font-bold transition-all duration-300 transform active:scale-90 relative overflow-hidden"
-                                :class="[
-                                    takenSeatIds.includes(siege.id) 
-                                        ? 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed opacity-50' 
-                                        : form.siege_ids.includes(siege.id)
-                                            ? 'bg-[#cc0000] text-white shadow-[0_0_20px_rgba(204,0,0,0.3)] scale-110 border-2 border-white/20'
-                                            : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#cc0000] dark:hover:text-[#cc0000] border border-gray-200 dark:border-gray-800'
-                                ]"
-                            >
-                                {{ siege.numero }}
-                                <!-- Selection dot -->
-                                <div v-if="form.siege_ids.includes(siege.id)" class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-white rounded-full"></div>
-                            </button>
+                    <div class="flex flex-col items-center gap-4 overflow-x-auto pb-8 scrollbar-hide w-full max-w-full">
+                        <div class="flex flex-col gap-3 p-4 min-w-max">
+                            <div v-for="(rowSeats, rowLetter) in groupedSeats" :key="rowLetter" class="flex items-center gap-4">
+                                <!-- Left Row label -->
+                                <div class="w-8 text-center font-bold text-gray-400 dark:text-gray-600">
+                                    {{ rowLetter }}
+                                </div>
+                                
+                                <!-- Seats -->
+                                <div class="flex gap-2">
+                                    <button 
+                                        v-for="siege in rowSeats" 
+                                        :key="siege.id"
+                                        @click="toggleSeat(siege.id)"
+                                        :disabled="takenSeatIds.includes(siege.id)"
+                                        class="w-8 h-8 md:w-10 md:h-10 rounded-t-lg rounded-b-sm flex items-center justify-center text-[10px] font-bold transition-all duration-300 transform active:scale-90 relative overflow-hidden group"
+                                        :class="[
+                                            takenSeatIds.includes(siege.id) 
+                                                ? 'bg-red-900/20 text-red-700/50 dark:bg-red-950/40 dark:text-red-900/50 cursor-not-allowed border-t-4 border-red-900/30' 
+                                                : form.siege_ids.includes(siege.id)
+                                                    ? 'bg-[#cc0000] text-white shadow-[0_0_15px_rgba(204,0,0,0.4)] scale-110 border-t-4 border-red-400 z-10'
+                                                    : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-[#cc0000] dark:hover:text-[#cc0000] border border-gray-200 dark:border-gray-700 border-t-4 border-t-gray-300 dark:border-t-gray-600 hover:border-t-[#cc0000]'
+                                        ]"
+                                    >
+                                        <span class="group-hover:scale-110 transition-transform">{{ siege.numero.replace(/^[A-Z]+/i, '') }}</span>
+                                        <!-- Selection indicator -->
+                                        <div v-if="form.siege_ids.includes(siege.id)" class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-white rounded-full"></div>
+                                    </button>
+                                </div>
+                                
+                                <!-- Right Row label (for better visibility on large screens) -->
+                                <div class="w-8 text-center font-bold text-gray-400 dark:text-gray-600 hidden sm:block">
+                                    {{ rowLetter }}
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Legend -->
                     <div class="flex flex-wrap justify-center gap-8 pt-8 border-t border-gray-200 dark:border-gray-800">
                         <div class="flex items-center gap-3">
-                            <div class="w-6 h-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md"></div>
+                            <div class="w-6 h-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 border-t-4 border-t-gray-300 dark:border-t-gray-600 rounded-t-lg rounded-b-sm"></div>
                             <span class="text-sm font-bold text-gray-500 dark:text-gray-400">Disponible</span>
                         </div>
                         <div class="flex items-center gap-3">
-                            <div class="w-6 h-6 bg-[#cc0000] rounded-md shadow-[0_0_15px_rgba(204,0,0,0.2)]"></div>
+                            <div class="w-6 h-6 bg-[#cc0000] border-t-4 border-red-400 rounded-t-lg rounded-b-sm shadow-[0_0_15px_rgba(204,0,0,0.3)]"></div>
                             <span class="text-sm font-bold text-gray-500 dark:text-gray-400">Sélectionné</span>
                         </div>
                         <div class="flex items-center gap-3">
-                            <div class="w-6 h-6 bg-gray-200 dark:bg-gray-800 opacity-50 rounded-md"></div>
+                            <div class="w-6 h-6 bg-red-900/20 dark:bg-red-950/40 border-t-4 border-red-900/30 rounded-t-lg rounded-b-sm"></div>
                             <span class="text-sm font-bold text-gray-500 dark:text-gray-400">Indisponible</span>
                         </div>
                     </div>
