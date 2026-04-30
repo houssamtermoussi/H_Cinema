@@ -72,75 +72,85 @@ const toggleUserMenu = () => {
 <template>
     <Head title="Welcome">
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" >
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     </Head>
 
     <div class="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300 flex flex-col">
-        <!-- Header -->
-        <header class="bg-[#ff0000] text-white shadow-lg sticky top-0 z-50">
-            <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-                <!-- Left: Logo & Title -->
-                <Link href="/" class="flex items-center gap-3 group">
-                    <img src="/images/logo2.png" alt="H-Cinema Logo" class="h-10 w-auto transform group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://ui-avatars.com/api/?name=HC&background=fff&color=f00&rounded=true'" />
-                    <span class="font-cinzel text-2xl font-bold tracking-wider">H-CINEMA</span>
-                </Link>
+        <!-- Floating Header Wrapper -->
+        <div class="sticky top-0 z-50 px-4 pt-4 md:px-8 md:pt-5">
+            <header class="bg-[#cc0000]/95 backdrop-blur-md text-white rounded-2xl shadow-[0_8px_32px_rgba(204,0,0,0.35)] border border-white/10 transition-all duration-300">
+                <div class="px-5 py-3 flex items-center justify-between">
+                    <!-- Left: Logo & Title -->
+                    <Link href="/" class="flex items-center gap-3 group">
+                        <img src="/images/logo2.png" alt="H-Cinema Logo" class="h-9 w-auto transform group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://ui-avatars.com/api/?name=HC&background=fff&color=cc0000&rounded=true'" />
+                        <span class="font-cinzel text-xl font-bold tracking-wider">H-CINEMA</span>
+                    </Link>
 
-                <!-- Right: Search, Theme, User -->
-                <div class="flex items-center gap-6">
-                    <!-- Search Bar -->
-                    <div class="relative hidden md:block">
-                        <input 
-                            type="text" 
-                            v-model="searchQuery"
-                            placeholder="Rechercher un film..." 
-                            class="bg-white/20 text-white placeholder-white/70 border border-white/30 rounded-full px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition-all duration-300 w-64"
-                        >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
+                    <!-- Right: Search, Theme, User -->
+                    <div class="flex items-center gap-4">
+                        <!-- Search Bar -->
+                        <div class="relative hidden md:block">
+                            <input
+                                type="text"
+                                v-model="searchQuery"
+                                placeholder="Rechercher un film..."
+                                class="bg-white/15 text-white placeholder-white/60 border border-white/25 rounded-full px-4 py-1.5 pr-10 focus:outline-none focus:ring-2 focus:ring-white/40 focus:bg-white/25 transition-all duration-300 w-56 text-sm"
+                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
 
-                    <!-- Dark Mode Toggle -->
-                    <button @click="toggleTheme" class="p-2 rounded-full hover:bg-white/20 transition-colors duration-300 focus:outline-none" aria-label="Toggle Theme">
-                        <svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                        </svg>
-                    </button>
+                        <!-- Dark Mode Toggle -->
+                        <button @click="toggleTheme" class="p-2 rounded-full hover:bg-white/20 transition-colors duration-300 focus:outline-none" aria-label="Toggle Theme">
+                            <svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </button>
 
-                    <!-- User Section -->
-                    <div class="relative">
-                        <template v-if="!$page.props.auth.user">
-                            <Link :href="login.url()" class="font-semibold px-5 py-2 rounded-full bg-white text-[#ff0000] hover:bg-gray-100 transition-colors duration-300 shadow-sm">
-                                Se connecter
-                            </Link>
-                        </template>
-                        <template v-else>
-                            <button @click="toggleUserMenu" class="flex items-center gap-2 font-medium hover:text-white/80 transition-colors focus:outline-none relative z-50">
-                                <img :src="`https://ui-avatars.com/api/?name=${$page.props.auth.user.name}&background=fff&color=f00&rounded=true`" alt="Avatar" class="h-8 w-8 rounded-full border-2 border-white/50" />
-                                <span class="hidden md:inline">{{ $page.props.auth.user.name }}</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
-                            <!-- Overlay to close menu -->
-                            <div v-if="isUserMenuOpen" class="fixed inset-0 z-40" @click="isUserMenuOpen = false"></div>
-                            <!-- Dropdown -->
-                            <div v-show="isUserMenuOpen" class="absolute right-0 mt-3 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-xl py-2 border border-gray-100 dark:border-gray-700 overflow-hidden transform origin-top-right transition-all z-50">
-                                <Link :href="dashboard.url()" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Mon compte</Link>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Paramètres</a>
-                                <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
-                                <Link v-if="$page.props.auth.user.role === 'admin'" :href="adminFilmsIndex.url()" class="block px-4 py-2 text-sm font-semibold text-[#ff0000] hover:bg-red-50 dark:hover:bg-red-900/20">Admin Dashboard</Link>
-                                <Link :href="logout.url()" method="post" as="button" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Déconnexion</Link>
-                            </div>
-                        </template>
+                        <!-- Separator -->
+                        <div class="hidden md:block w-px h-6 bg-white/25"></div>
+
+                        <!-- User Section -->
+                        <div class="relative">
+                            <template v-if="!$page.props.auth.user">
+                                <div class="flex items-center gap-2">
+                                    <Link :href="login.url()" class="font-semibold text-sm px-4 py-1.5 rounded-full bg-white text-[#cc0000] hover:bg-gray-100 transition-colors duration-300 shadow-sm">
+                                        Se connecter
+                                    </Link>
+                                    <Link v-if="canRegister" :href="register.url()" class="font-semibold text-sm px-4 py-1.5 rounded-full border border-white/60 text-white hover:bg-white hover:text-[#cc0000] transition-all duration-300">
+                                        S'inscrire
+                                    </Link>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <button @click="toggleUserMenu" class="flex items-center gap-2 font-medium hover:text-white/80 transition-colors focus:outline-none relative z-50">
+                                    <img :src="`https://ui-avatars.com/api/?name=${$page.props.auth.user.name}&background=fff&color=cc0000&rounded=true`" alt="Avatar" class="h-8 w-8 rounded-full border-2 border-white/40 shadow-sm" />
+                                    <span class="hidden md:inline text-sm">{{ $page.props.auth.user.name }}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <!-- Overlay to close menu -->
+                                <div v-if="isUserMenuOpen" class="fixed inset-0 z-40" @click="isUserMenuOpen = false"></div>
+                                <!-- Dropdown -->
+                                <div v-show="isUserMenuOpen" class="absolute right-0 mt-3 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-xl py-2 border border-gray-100 dark:border-gray-700 overflow-hidden transform origin-top-right transition-all z-50">
+                                    <Link :href="dashboard.url()" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Mon compte</Link>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Paramètres</a>
+                                    <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
+                                    <Link v-if="$page.props.auth.user.role === 'admin'" :href="adminFilmsIndex.url()" class="block px-4 py-2 text-sm font-semibold text-[#cc0000] hover:bg-red-50 dark:hover:bg-red-900/20">Admin Dashboard</Link>
+                                    <Link :href="logout.url()" method="post" as="button" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Déconnexion</Link>
+                                </div>
+                            </template>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </div>
 
         <!-- Main Content -->
         <main class="flex-grow flex flex-col items-center justify-start w-full px-4 py-12 md:py-20">
@@ -172,15 +182,6 @@ const toggleUserMenu = () => {
                     </button>
                 </div>
                 
-                <div class="w-full md:w-auto relative">
-                    <select v-model="selectedCategory" class="appearance-none w-full md:w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 py-2 px-4 pr-8 rounded-xl leading-tight focus:outline-none focus:ring-2 focus:ring-[#ff0000]/50 shadow-sm transition-all">
-                        <option value="">Toutes catégories</option>
-                        <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-400">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                    </div>
-                </div>
             </div>
 
             <!-- Films Grid -->
@@ -189,7 +190,7 @@ const toggleUserMenu = () => {
                     <Link v-for="film in films.data" :key="film.id" :href="filmsShow.url(film.id)" class="group flex flex-col bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-[#ff0000]/20 transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-800">
                         <!-- Poster Container -->
                         <div class="relative aspect-[2/3] w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <img :src="`/images/posters/${film.affiche}`" :alt="film.titre" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" onerror="this.src='/images/posters/default.jpg'" />
+                            <img :src="film.affiche" :alt="film.titre" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" onerror="this.src='/images/posters/default.jpg'" />
                             <!-- Overlay -->
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                                 <span class="bg-[#ff0000] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-lg">Réserver</span>
