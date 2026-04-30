@@ -18,7 +18,7 @@ class PaiementController extends Controller
     public function create(Reservation $reservation): Response
     {
         // Ensure user owns the reservation and it's in a payable state
-        if ($reservation->user_id !== auth()->id() || $reservation->statut === 'confirme') {
+        if ($reservation->user_id !== auth()->id() || $reservation->statut === 'confirmée') {
             return redirect()->route('reservations.show', $reservation);
         }
 
@@ -52,7 +52,7 @@ class PaiementController extends Controller
                 'methode_paiement' => $validated['methode_paiement'],
             ]);
 
-            $reservation->update(['statut' => 'confirme']);
+            $reservation->update(['statut' => 'confirmée']);
 
             return redirect()->route('reservations.show', $reservation)
                 ->with('message', 'Paiement effectué avec succès !');

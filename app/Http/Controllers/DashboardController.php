@@ -21,7 +21,7 @@ class DashboardController extends Controller
                 ->take(5)
                 ->get(),
             'total_bookings' => $user->reservations()->count(),
-            'confirmed_bookings' => $user->reservations()->where('statut', 'confirme')->count(),
+            'confirmed_bookings' => $user->reservations()->where('statut', 'confirmée')->count(),
         ]);
     }
 }

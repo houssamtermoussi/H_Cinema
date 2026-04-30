@@ -43,7 +43,7 @@ class ReservationController extends Controller
                 'user_id' => auth()->id(),
                 'seance_id' => $validated['seance_id'],
                 'nombre_places' => count($validated['siege_ids']),
-                'statut' => 'en_attente',
+                'statut' => 'en attente',
             ]);
 
             foreach ($validated['siege_ids'] as $siegeId) {

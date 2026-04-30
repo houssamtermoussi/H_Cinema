@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Head, Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Head, Link, router } from '@inertiajs/vue3';
+import { ref, watch } from 'vue';
 import { show as filmsShow } from '@/routes/films';
+import { home } from '@/routes';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 
 const props = defineProps<{
@@ -15,6 +16,17 @@ const props = defineProps<{
 }>();
 
 const selectedCategory = ref(props.filters.category || '');
+
+watch(selectedCategory, (newCategory) => {
+    router.get(home.url(), {
+        category: newCategory || undefined,
+        search: props.filters.search
+    }, {
+        preserveState: true,
+        preserveScroll: true,
+        replace: true
+    });
+});
 </script>
 
 <template>
@@ -31,7 +43,7 @@ const selectedCategory = ref(props.filters.category || '');
                 <!-- Hero Title -->
                 <div class="text-center mb-16 animate-fade-in-up">
                     <h1 class="text-5xl md:text-7xl font-bold mb-2">
-                        <span class="text-gray-900 dark:text-white">Welcome </span>
+                        <span class="text-gray-900 dark:text-white">Welcome to </span>
                         <span class="text-[#ff0000] font-cinzel">H-Cinema</span>
                     </h1>
                     <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-4">Découvrez les meilleurs films, réservez vos places et vivez la magie du cinéma avec nous.</p>

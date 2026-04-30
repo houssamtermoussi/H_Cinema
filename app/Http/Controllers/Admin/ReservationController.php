@@ -29,7 +29,7 @@ class ReservationController extends Controller
     public function update(Request $request, Reservation $reservation): RedirectResponse
     {
         $validated = $request->validate([
-            'statut' => 'required|string|in:en_attente,confirme,annule',
+            'statut' => 'required|string|in:en attente,confirmée,annulée',
         ]);
 
         $reservation->update($validated);

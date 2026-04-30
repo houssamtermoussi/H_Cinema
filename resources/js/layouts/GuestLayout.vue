@@ -38,8 +38,10 @@ const toggleUserMenu = () => {
 };
 
 const handleSearch = () => {
+    const filters = page.props.filters as any;
     router.get(home.url(), { 
-        search: localSearchQuery.value 
+        search: localSearchQuery.value,
+        category: filters?.category
     }, { preserveState: true });
 };
 

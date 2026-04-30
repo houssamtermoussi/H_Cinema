@@ -11,8 +11,8 @@ import { update } from '@/routes/password';
 
 defineOptions({
     layout: {
-        title: 'Reset password',
-        description: 'Please enter your new password below',
+        title: 'Réinitialisation',
+        description: 'Veuillez choisir un nouveau mot de passe sécurisé.',
     },
 });
 
@@ -25,7 +25,7 @@ const inputEmail = ref(props.email);
 </script>
 
 <template>
-    <Head title="Reset password" />
+    <Head title="Réinitialiser le mot de passe" />
 
     <Form
         v-bind="update.form()"
@@ -35,52 +35,52 @@ const inputEmail = ref(props.email);
     >
         <div class="grid gap-6">
             <div class="grid gap-2">
-                <Label for="email">Email</Label>
+                <Label for="email" class="font-bold text-gray-700 dark:text-gray-300">Email</Label>
                 <Input
                     id="email"
                     type="email"
                     name="email"
                     autocomplete="email"
                     v-model="inputEmail"
-                    class="mt-1 block w-full"
+                    class="rounded-xl border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50"
                     readonly
                 />
                 <InputError :message="errors.email" class="mt-2" />
             </div>
 
             <div class="grid gap-2">
-                <Label for="password">Password</Label>
+                <Label for="password" class="font-bold text-gray-700 dark:text-gray-300">Nouveau mot de passe</Label>
                 <PasswordInput
                     id="password"
                     name="password"
                     autocomplete="new-password"
-                    class="mt-1 block w-full"
+                    class="rounded-xl border-gray-200 dark:border-gray-800 focus:ring-[#cc0000] focus:border-[#cc0000]"
                     autofocus
-                    placeholder="Password"
+                    placeholder="••••••••"
                 />
                 <InputError :message="errors.password" />
             </div>
 
             <div class="grid gap-2">
-                <Label for="password_confirmation"> Confirm password </Label>
+                <Label for="password_confirmation" class="font-bold text-gray-700 dark:text-gray-300"> Confirmer le mot de passe </Label>
                 <PasswordInput
                     id="password_confirmation"
                     name="password_confirmation"
                     autocomplete="new-password"
-                    class="mt-1 block w-full"
-                    placeholder="Confirm password"
+                    class="rounded-xl border-gray-200 dark:border-gray-800 focus:ring-[#cc0000] focus:border-[#cc0000]"
+                    placeholder="••••••••"
                 />
                 <InputError :message="errors.password_confirmation" />
             </div>
 
             <Button
                 type="submit"
-                class="mt-4 w-full"
+                class="mt-4 w-full py-6 bg-[#cc0000] hover:bg-red-700 text-white font-bold text-lg rounded-xl transition-all duration-300 shadow-lg shadow-red-900/20 active:scale-[0.98]"
                 :disabled="processing"
                 data-test="reset-password-button"
             >
-                <Spinner v-if="processing" />
-                Reset password
+                <Spinner v-if="processing" class="mr-2" />
+                Réinitialiser
             </Button>
         </div>
     </Form>
