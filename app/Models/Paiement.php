@@ -15,6 +15,7 @@ class Paiement extends Model
         'montant',
         'statut',
         'methode_paiement',
+        'stripe_session_id',
     ];
 
     protected function casts(): array

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppLayout from '@/layouts/AppLayout.vue';
+
 import adminRoutes from "@/routes/admin";
 import { Head, Link, router } from '@inertiajs/vue3';
 
@@ -21,30 +21,30 @@ const formatDate = (dateString: string) => {
 
 <template>
     <Head title="Gestion des Films" />
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <div class="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
         <div class="p-8 max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
                 <div>
-                    <h1 class="text-4xl font-black text-white tracking-tighter mb-2">GESTION DU CATALOGUE</h1>
+                    <h1 class="text-4xl font-black text-gray-900 dark:text-white tracking-tighter mb-2 uppercase font-cinzel">GESTION DU CATALOGUE</h1>
                     <p class="text-zinc-500 font-medium">Administrez les films disponibles à l'affiche.</p>
                 </div>
-                <Link :href="adminRoutes.films.create().url" class="px-8 py-4 bg-white text-black font-black rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 flex items-center gap-3 shadow-xl">
+                <Link :href="adminRoutes.films.create().url" class="px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-black rounded-2xl hover:bg-[#cc0000] dark:hover:bg-[#cc0000] hover:text-white dark:hover:text-white transition-all duration-300 flex items-center gap-3 shadow-xl">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" /></svg>
                     Ajouter un film
                 </Link>
             </div>
 
-            <div class="bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 rounded-[2.5rem] overflow-hidden shadow-2xl">
+            <div class="bg-white dark:bg-zinc-900/40 backdrop-blur-xl border border-gray-200 dark:border-zinc-800/50 rounded-[2.5rem] overflow-hidden shadow-2xl">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-zinc-900/80 border-b border-zinc-800">
+                            <tr class="bg-gray-50 dark:bg-zinc-900/80 border-b border-gray-100 dark:border-zinc-800">
                                 <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest">Film & Poster</th>
                                 <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest">Type / Durée</th>
                                 <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest text-right">Gestion</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-zinc-800/30">
+                        <tbody class="divide-y divide-gray-100 dark:divide-zinc-800/30">
                             <tr v-for="film in films" :key="film.id" class="hover:bg-zinc-800/20 transition-all duration-300 group">
                                 <td class="px-8 py-6">
                                     <div class="flex items-center gap-6">
@@ -55,7 +55,7 @@ const formatDate = (dateString: string) => {
                                             </div>
                                         </div>
                                         <div>
-                                            <p class="text-white font-black text-xl tracking-tight mb-1 group-hover:text-red-500 transition-colors">{{ film.titre }}</p>
+                                            <p class="text-gray-900 dark:text-white font-black text-xl tracking-tight mb-1 group-hover:text-[#cc0000] transition-colors">{{ film.titre }}</p>
                                             <p class="text-zinc-500 text-xs font-bold">{{ formatDate(film.date_sortie) }}</p>
                                         </div>
                                     </div>
@@ -76,7 +76,7 @@ const formatDate = (dateString: string) => {
                                         <Link :href="adminRoutes.films.edit(film.id).url" class="p-3 bg-zinc-950 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-xl transition-all border border-zinc-800">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                                         </Link>
-                                        <button @click="deleteFilm(film.id)" class="p-3 bg-zinc-950 text-zinc-400 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all border border-zinc-800 hover:border-red-500/30">
+                                        <button @click="deleteFilm(film.id)" class="p-3 bg-white dark:bg-zinc-950 text-gray-400 dark:text-zinc-400 hover:text-[#cc0000] hover:bg-[#cc0000]/10 rounded-xl transition-all border border-gray-200 dark:border-zinc-800 hover:border-[#cc0000]/30 shadow-sm">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                         </button>
                                     </div>
@@ -91,5 +91,6 @@ const formatDate = (dateString: string) => {
                 <p class="text-zinc-500 text-lg font-bold">Aucun film dans le catalogue.</p>
             </div>
         </div>
-    </AppLayout>
+    </div>
+    </div>
 </template>

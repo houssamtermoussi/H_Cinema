@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppLayout from '@/layouts/AppLayout.vue';
+
 import { Head, Link } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -22,32 +22,31 @@ const formatDate = (dateString: string) => {
 
 <template>
     <Head title="Votre Ticket" />
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="min-h-screen bg-black flex flex-col items-center py-20 px-8">
+    <div class="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center py-12 md:py-20 px-4 md:px-8 relative overflow-hidden transition-colors duration-300">
             <div class="max-w-2xl w-full">
                 
                 <!-- Ticket Container -->
-                <div class="bg-zinc-900 border border-zinc-800/50 rounded-[3.5rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.7)] flex flex-col group transition-all duration-700 hover:shadow-red-900/10">
+                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800/50 rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl flex flex-col group transition-all duration-700 hover:shadow-[#cc0000]/10">
                     
                     <!-- Header/Poster section -->
                     <div class="relative h-80 overflow-hidden">
                         <img v-if="reservation.seance.film.affiche" :src="reservation.seance.film.affiche" class="w-full h-full object-cover opacity-60 blur-sm scale-110 group-hover:scale-100 transition-transform duration-1000" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-100 dark:from-zinc-900 via-gray-100/60 dark:zinc-900/60 to-transparent"></div>
                         <div class="absolute inset-0 flex flex-col items-center justify-center p-10 text-center">
-                            <span class="inline-block px-4 py-1.5 bg-red-600 text-[10px] font-black uppercase rounded-full text-white tracking-widest mb-4 shadow-xl shadow-red-600/30">{{ reservation.seance.film.type }}</span>
-                            <h1 class="text-5xl md:text-6xl font-black text-white tracking-tighter mb-3 leading-none drop-shadow-2xl">{{ reservation.seance.film.titre }}</h1>
-                            <div class="w-16 h-1 bg-red-600 rounded-full mt-2"></div>
+                            <span class="inline-block px-4 py-1.5 bg-[#cc0000] text-[10px] font-black uppercase rounded-full text-white tracking-widest mb-4 shadow-xl shadow-red-600/30">{{ reservation.seance.film.type }}</span>
+                            <h1 class="text-5xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tighter mb-3 leading-none drop-shadow-2xl font-cinzel">{{ reservation.seance.film.titre }}</h1>
+                            <div class="w-16 h-1 bg-[#cc0000] rounded-full mt-2"></div>
                         </div>
                     </div>
                     
                     <!-- The Perforation -->
                     <div class="relative flex items-center px-16">
                         <!-- Cutouts -->
-                        <div class="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-20 bg-black rounded-r-full border-r border-zinc-800/50 shadow-[inset_-10px_0_20px_rgba(0,0,0,0.5)]"></div>
-                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-20 bg-black rounded-l-full border-l border-zinc-800/50 shadow-[inset_10px_0_20px_rgba(0,0,0,0.5)]"></div>
+                        <div class="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-20 bg-gray-50 dark:bg-black rounded-r-full border-r border-gray-200 dark:border-zinc-800/50 shadow-[inset_-10px_0_20px_rgba(0,0,0,0.05)]"></div>
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-20 bg-gray-50 dark:bg-black rounded-l-full border-l border-gray-200 dark:border-zinc-800/50 shadow-[inset_10px_0_20px_rgba(0,0,0,0.05)]"></div>
                         
                         <!-- Dashed line -->
-                        <div class="w-full border-t-4 border-dashed border-zinc-800/80"></div>
+                        <div class="w-full border-t-4 border-dashed border-gray-200 dark:border-zinc-800/80"></div>
                     </div>
                     
                     <!-- Details section -->
@@ -55,23 +54,23 @@ const formatDate = (dateString: string) => {
                         <div class="grid grid-cols-3 gap-10 mb-16">
                             <div class="space-y-2">
                                 <span class="block text-[10px] font-black text-zinc-500 uppercase tracking-widest">Date de séance</span>
-                                <span class="block text-2xl font-black text-white tracking-tighter">{{ formatDate(reservation.seance.date_seance) }}</span>
+                                <span class="block text-2xl font-black text-gray-900 dark:text-white tracking-tighter">{{ formatDate(reservation.seance.date_seance) }}</span>
                             </div>
-                            <div class="space-y-2 border-x border-zinc-800/50 px-8 text-center">
+                            <div class="space-y-2 border-x border-gray-100 dark:border-zinc-800/50 px-8 text-center">
                                 <span class="block text-[10px] font-black text-zinc-500 uppercase tracking-widest">Horaire</span>
-                                <span class="block text-2xl font-black text-white tracking-tighter">{{ reservation.seance.heure_debut.substring(0, 5) }}</span>
+                                <span class="block text-2xl font-black text-gray-900 dark:text-white tracking-tighter">{{ reservation.seance.heure_debut.substring(0, 5) }}</span>
                             </div>
                             <div class="space-y-2 text-right">
                                 <span class="block text-[10px] font-black text-zinc-500 uppercase tracking-widest">Salle de cinéma</span>
-                                <span class="block text-2xl font-black text-red-500 tracking-tighter">{{ reservation.seance.salle.nom }}</span>
+                                <span class="block text-2xl font-black text-[#cc0000] tracking-tighter">{{ reservation.seance.salle.nom }}</span>
                             </div>
                         </div>
                         
                         <!-- Seat badges -->
                         <div class="flex flex-wrap items-center justify-center gap-3 mb-16">
-                            <div v-for="rs in reservation.reservation_sieges" :key="rs.id" class="px-6 py-3 bg-zinc-950 border border-zinc-800 rounded-2xl flex flex-col items-center min-w-[90px] shadow-lg group-hover:border-red-600/30 transition-colors">
+                            <div v-for="rs in reservation.reservation_sieges" :key="rs.id" class="px-6 py-3 bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-2xl flex flex-col items-center min-w-[90px] shadow-sm group-hover:border-[#cc0000]/30 transition-colors">
                                 <span class="text-[9px] font-black text-zinc-600 uppercase tracking-widest mb-1">Siège</span>
-                                <span class="text-2xl font-black text-white">{{ rs.siege.numero }}</span>
+                                <span class="text-2xl font-black text-gray-900 dark:text-white">{{ rs.siege.numero }}</span>
                             </div>
                         </div>
                         
@@ -93,7 +92,7 @@ const formatDate = (dateString: string) => {
                     </div>
                     
                     <!-- Footer of the ticket -->
-                    <div class="bg-zinc-950/50 px-16 py-6 border-t border-zinc-800/50 flex justify-between items-center">
+                    <div class="bg-gray-50 dark:bg-zinc-950/50 px-16 py-6 border-t border-gray-100 dark:border-zinc-800/50 flex justify-between items-center">
                         <div class="text-[9px] font-black text-zinc-700 uppercase tracking-widest">
                             RÉSERVATION #{{ String(reservation.id).padStart(8, '0') }}
                         </div>
@@ -105,18 +104,18 @@ const formatDate = (dateString: string) => {
                 
                 <!-- Actions -->
                 <div class="mt-16 flex flex-col sm:flex-row justify-center gap-6 no-print">
-                    <button onclick="window.print()" class="flex-1 px-8 py-5 bg-zinc-900 border border-zinc-800 text-white font-black rounded-2xl hover:bg-zinc-800 transition-all flex items-center justify-center gap-3 shadow-xl">
+                    <button onclick="window.print()" class="flex-1 px-8 py-5 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-gray-900 dark:text-white font-black rounded-2xl hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all flex items-center justify-center gap-3 shadow-xl">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2-2z" /></svg>
                         Imprimer mon billet
                     </button>
-                    <Link href="/films" class="flex-1 px-8 py-5 bg-white text-black font-black text-lg rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-3 shadow-xl">
+                    <Link href="/films" class="flex-1 px-8 py-5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-black text-lg rounded-2xl hover:bg-[#cc0000] dark:hover:bg-[#cc0000] hover:text-white dark:hover:text-white transition-all duration-300 flex items-center justify-center gap-3 shadow-xl">
                          Découvrir d'autres films
                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
                     </Link>
                 </div>
             </div>
         </div>
-    </AppLayout>
+    </div>
 
     <style>
     @media print {

@@ -9,6 +9,7 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SeanceController;
+use App\Http\Controllers\WebhookController;
 use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Payment routes
     Route::get('/paiements/create/{reservation}', [PaiementController::class, 'create'])->name('paiements.create');
     Route::post('/paiements', [PaiementController::class, 'store'])->name('paiements.store');
+    Route::get('/paiements/success/{reservation}', [PaiementController::class, 'success'])->name('paiements.success');
+    Route::get('/paiements/cancel/{reservation}', [PaiementController::class, 'cancel'])->name('paiements.cancel');
 
     // Admin routes
     Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function () {
@@ -58,5 +61,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('reservations', AdminReservationController::class)->only(['index', 'update', 'destroy']);
     });
 });
+
+Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook'])->name('cashier.webhook');
 
 require __DIR__.'/settings.php';

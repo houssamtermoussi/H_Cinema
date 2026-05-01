@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
 import reservationRoutes from '@/routes/reservations';
 
@@ -14,12 +13,12 @@ defineProps<{
 
 <template>
     <Head title="Tableau de bord" />
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <div class="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
         <div class="p-6 md:p-10 space-y-10">
             <!-- Stats Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-[2.5rem] shadow-xl relative overflow-hidden group">
-                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-red-600/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-[#cc0000]/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                     <div class="relative z-10">
                         <p class="text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2">Total Réservations</p>
                         <p class="text-5xl font-black text-white tracking-tighter">{{ total_bookings }}</p>
@@ -50,7 +49,7 @@ defineProps<{
             <div class="space-y-6">
                 <div class="flex items-end justify-between px-2">
                     <h2 class="text-3xl font-black text-white tracking-tighter">ACTIVITÉ RÉCENTE</h2>
-                    <Link :href="reservationRoutes.index().url" class="text-red-500 font-black text-sm uppercase tracking-widest hover:underline">Voir tout</Link>
+                    <Link :href="reservationRoutes.index().url" class="text-[#cc0000] font-black text-sm uppercase tracking-widest hover:underline">Voir tout</Link>
                 </div>
 
                 <div class="bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 rounded-[3rem] overflow-hidden shadow-2xl">
@@ -84,12 +83,12 @@ defineProps<{
                     
                     <div v-else class="p-20 text-center">
                         <p class="text-zinc-600 font-bold italic">Aucune rÃ©servation rÃ©cente.</p>
-                        <Link href="/films" class="mt-6 inline-flex px-8 py-3 bg-white text-black font-black rounded-2xl hover:bg-red-600 hover:text-white transition-all">
+                        <Link href="/films" class="mt-6 inline-flex px-8 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-black rounded-2xl hover:bg-[#cc0000] dark:hover:bg-[#cc0000] hover:text-white dark:hover:text-white transition-all shadow-lg">
                             Réserver un film
                         </Link>
                     </div>
                 </div>
             </div>
         </div>
-    </AppLayout>
+    </div>
 </template>
