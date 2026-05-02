@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FilmController as AdminFilmController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\SalleController as AdminSalleController;
@@ -55,6 +56,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Admin routes
     Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('films', AdminFilmController::class);
         Route::resource('seances', AdminSeanceController::class);
         Route::resource('salles', AdminSalleController::class);

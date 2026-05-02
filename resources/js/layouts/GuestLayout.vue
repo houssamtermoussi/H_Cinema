@@ -2,6 +2,7 @@
 import { Link, usePage, router } from '@inertiajs/vue3';
 import { ref, onMounted, watch } from 'vue';
 import { dashboard, home, login, logout, register } from '@/routes';
+import admin from '@/routes/admin';
 import { edit as editProfile } from '@/routes/profile';
 import { index as adminFilmsIndex } from '@/routes/admin/films';
 
@@ -113,6 +114,14 @@ const page = usePage();
                             <template v-else>
                                 <!-- Authenticated user controls -->
                                 <div class="flex items-center gap-3">
+                                    <!-- Dashboard button for admin -->
+                                    <Link v-if="$page.props.auth.user.role === 'admin'" :href="admin.dashboard.url()" class="flex items-center gap-1.5 text-sm font-bold px-4 py-1.5 rounded-full bg-white text-[#cc0000] hover:bg-gray-100 transition-all duration-300 shadow-md border border-white/20" title="Administration">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 00-2 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                        </svg>
+                                        <span class="hidden lg:inline">Dashboard Admin</span>
+                                    </Link>
+
                                     <!-- Settings button -->
                                     <Link :href="editProfile.url()" class="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 transition-all duration-300" title="Paramètres">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
