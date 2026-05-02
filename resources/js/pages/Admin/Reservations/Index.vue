@@ -22,60 +22,62 @@ const formatDate = (dateString: string) => {
 
 <template>
     <Head title="Gestion des Réservations" />
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="p-8 max-w-7xl mx-auto">
-             <header class="mb-12">
-                <h1 class="text-4xl font-black text-white tracking-tighter mb-2 uppercase">GESTION DES RÉSERVATIONS</h1>
-                <p class="text-zinc-500 font-medium">Consultez et administrez l'ensemble des réservations effectuées par les clients.</p>
+    <template>
+    <Head title="Gestion des Réservations" />
+    <div class="py-10">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+             <header class="mb-10 text-center">
+                <h1 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight font-cinzel uppercase">Gestion des Réservations</h1>
+                <p class="text-gray-500 dark:text-gray-400 font-medium mt-2">Consultez et administrez l'ensemble des réservations effectuées par les clients.</p>
             </header>
 
-            <div class="bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 rounded-[3rem] overflow-hidden shadow-2xl">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-gray-700">
                  <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-zinc-900/80 border-b border-zinc-800">
-                                <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest">Client</th>
-                                <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest">Séance & Film</th>
-                                <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest text-center">Places</th>
-                                <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest">Statut</th>
-                                <th class="px-8 py-6 text-zinc-500 text-[10px] font-black uppercase tracking-widest text-right">Total HT</th>
+                            <tr class="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-100 dark:border-gray-700">
+                                <th class="px-6 py-4 text-gray-500 text-xs font-bold uppercase tracking-wider">Client</th>
+                                <th class="px-6 py-4 text-gray-500 text-xs font-bold uppercase tracking-wider">Séance & Film</th>
+                                <th class="px-6 py-4 text-gray-500 text-xs font-bold uppercase tracking-wider text-center">Places</th>
+                                <th class="px-6 py-4 text-gray-500 text-xs font-bold uppercase tracking-wider">Statut</th>
+                                <th class="px-6 py-4 text-gray-500 text-xs font-bold uppercase tracking-wider text-right">Total HT</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-zinc-800/30">
-                            <tr v-for="res in reservations" :key="res.id" class="hover:bg-zinc-800/20 transition-all duration-300 group">
-                                <td class="px-8 py-6">
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700/50">
+                            <tr v-for="res in reservations" :key="res.id" class="hover:bg-gray-50 dark:hover:bg-gray-700/20 transition-all group">
+                                <td class="px-6 py-4">
                                     <div class="flex items-center gap-4">
-                                        <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 font-black border border-zinc-700">
+                                        <div class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center text-gray-500 font-bold border border-gray-200 dark:border-gray-700">
                                             {{ res.user.name.charAt(0) }}
                                         </div>
                                         <div class="flex flex-col">
-                                            <span class="text-white font-black tracking-tight group-hover:text-red-500 transition-colors">{{ res.user.name }}</span>
-                                            <span class="text-zinc-500 text-[10px] font-bold uppercase tracking-tighter">{{ res.user.email }}</span>
+                                            <span class="text-gray-900 dark:text-white font-bold leading-tight group-hover:text-[#cc0000] transition-colors">{{ res.user.name }}</span>
+                                            <span class="text-gray-500 text-xs">{{ res.user.email }}</span>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-8 py-6">
+                                <td class="px-6 py-4">
                                     <div class="flex flex-col">
-                                        <span class="text-zinc-300 font-bold tracking-tight">{{ res.seance.film.titre }}</span>
-                                        <span class="text-zinc-500 text-[10px] font-black uppercase tracking-widest">{{ formatDate(res.seance.date_seance) }} • {{ res.seance.heure_debut.substring(0, 5) }}</span>
+                                        <span class="text-gray-900 dark:text-white font-bold">{{ res.seance.film.titre }}</span>
+                                        <span class="text-gray-500 text-xs font-bold uppercase tracking-wider mt-0.5">{{ formatDate(res.seance.date_seance) }} • {{ res.seance.heure_debut.substring(0, 5) }}</span>
                                     </div>
                                 </td>
-                                <td class="px-8 py-6 text-center">
-                                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-zinc-950 border border-zinc-800 text-white font-black">{{ res.nombre_places }}</span>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white font-bold">{{ res.nombre_places }}</span>
                                 </td>
-                                <td class="px-8 py-6">
+                                <td class="px-6 py-4">
                                     <div class="flex items-center gap-2">
-                                        <div :class="res.statut === 'confirme' ? 'bg-green-500' : 'bg-orange-500'" class="w-1.5 h-1.5 rounded-full shadow-[0_0_8px_currentColor]"></div>
+                                        <div :class="res.statut === 'confirme' ? 'bg-green-500' : 'bg-orange-500'" class="w-2 h-2 rounded-full shadow-sm"></div>
                                         <span 
-                                            :class="res.statut === 'confirme' ? 'text-green-500' : 'text-orange-500'"
-                                            class="text-[10px] font-black uppercase tracking-widest"
+                                            :class="res.statut === 'confirme' ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400'"
+                                            class="text-xs font-bold uppercase tracking-wider"
                                         >
                                             {{ res.statut === 'confirme' ? 'Confirmé' : 'En attente' }}
                                         </span>
                                     </div>
                                 </td>
-                                <td class="px-8 py-6 text-right">
-                                    <span class="text-white font-black text-2xl tracking-tighter">{{ (res.nombre_places * res.seance.prix).toFixed(2) }}€</span>
+                                <td class="px-6 py-4 text-right">
+                                    <span class="text-[#cc0000] font-black text-xl">{{ (res.nombre_places * res.seance.prix).toFixed(2) }}€</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -83,9 +85,9 @@ const formatDate = (dateString: string) => {
                  </div>
             </div>
             
-             <div v-if="reservations.length === 0" class="flex flex-col items-center justify-center py-32 bg-zinc-950 rounded-[4rem] border border-dashed border-zinc-800/50 mt-8">
-                <p class="text-zinc-500 text-lg font-bold">Aucune réservation dans le système.</p>
+             <div v-if="reservations.length === 0" class="flex flex-col items-center justify-center py-20 bg-white dark:bg-gray-800 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700 mt-6 text-center">
+                <p class="text-gray-500 font-medium italic">Aucune réservation dans le système.</p>
             </div>
         </div>
-    </AppLayout>
+    </div>
 </template>

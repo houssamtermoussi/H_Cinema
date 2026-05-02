@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import adminRoutes from "@/routes/admin";
 import { Head, useForm, Link } from '@inertiajs/vue3';
@@ -32,96 +32,96 @@ const types = ['Action', 'ComÃ©die', 'Drame', 'Horreur', 'Science-Fiction', 'A
 
 <template>
     <Head :title="'Modifier ' + film.titre" />
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="p-8 max-w-4xl mx-auto">
-            <header class="mb-12">
-                <h1 class="text-4xl font-black text-white tracking-tighter mb-2 uppercase">MODIFIER : {{ film.titre }}</h1>
-                <p class="text-zinc-500 font-medium">Mettez Ã  jour les informations du film.</p>
+    <div class="py-10">
+        <div class="max-w-4xl mx-auto px-4 md:px-8">
+            <header class="mb-10 text-center">
+                <h1 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight font-cinzel uppercase">Modifier le Film</h1>
+                <p class="text-gray-500 dark:text-gray-400 font-medium mt-2">Mettez à jour les informations de {{ film.titre }}.</p>
             </header>
 
-            <form @submit.prevent="submit" class="bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 p-10 rounded-[2.5rem] shadow-2xl space-y-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <form @submit.prevent="submit" class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 p-8 rounded-2xl shadow-md space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Titre -->
                     <div class="md:col-span-2">
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">Titre du film</label>
+                        <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Titre du film</label>
                         <input 
                             v-model="form.titre" 
                             type="text" 
-                            class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-white font-bold focus:border-red-600 focus:ring-0 transition-all"
+                            class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-gray-900 dark:text-white font-bold focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
                         />
                         <InputError :message="form.errors.titre" class="mt-2" />
                     </div>
 
                     <!-- Type -->
                     <div>
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">Genre</label>
+                        <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Genre</label>
                         <select 
                             v-model="form.type" 
-                            class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-white font-bold focus:border-red-600 focus:ring-0 transition-all"
+                            class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-gray-900 dark:text-white font-bold focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
                         >
                             <option v-for="t in types" :key="t" :value="t">{{ t }}</option>
                         </select>
                         <InputError :message="form.errors.type" class="mt-2" />
                     </div>
 
-                    <!-- DurÃ©e -->
+                    <!-- Durée -->
                     <div>
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">DurÃ©e (minutes)</label>
+                        <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Durée (minutes)</label>
                         <input 
                             v-model="form.duree" 
                             type="number" 
-                            class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-white font-bold focus:border-red-600 focus:ring-0 transition-all"
+                            class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-gray-900 dark:text-white font-bold focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
                         />
                         <InputError :message="form.errors.duree" class="mt-2" />
                     </div>
 
                     <!-- Date de sortie -->
                     <div>
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">Date de sortie</label>
+                        <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Date de sortie</label>
                         <input 
                             v-model="form.date_sortie" 
                             type="date" 
-                            class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-white font-bold focus:border-red-600 focus:ring-0 transition-all"
+                            class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-gray-900 dark:text-white font-bold focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
                         />
                         <InputError :message="form.errors.date_sortie" class="mt-2" />
                     </div>
 
                     <!-- Affiche -->
                     <div>
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">URL de l'affiche</label>
+                        <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">URL de l'affiche</label>
                         <input 
                             v-model="form.affiche" 
                             type="text" 
-                            class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-white font-bold focus:border-red-600 focus:ring-0 transition-all placeholder:text-zinc-700"
+                            class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-gray-900 dark:text-white font-bold focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
                         />
                         <InputError :message="form.errors.affiche" class="mt-2" />
                     </div>
 
                     <!-- Description -->
                     <div class="md:col-span-2">
-                        <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 px-1">Synopsis / Description</label>
+                        <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Synopsis / Description</label>
                         <textarea 
                             v-model="form.description" 
                             rows="5"
-                            class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-white font-bold focus:border-red-600 focus:ring-0 transition-all"
+                            class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-gray-900 dark:text-white font-bold focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
                         ></textarea>
                         <InputError :message="form.errors.description" class="mt-2" />
                     </div>
                 </div>
 
-                <div class="pt-8 flex justify-end gap-4 border-t border-zinc-800/50">
-                    <Link :href="adminRoutes.films.index().url" class="px-8 py-4 bg-zinc-950 text-zinc-500 font-black rounded-2xl hover:text-white transition-all">
+                <div class="pt-8 flex justify-end gap-4 border-t border-gray-100 dark:border-gray-700">
+                    <Link :href="adminRoutes.films.index().url" class="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-white font-bold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-all">
                         Annuler
                     </Link>
                     <button 
                         type="submit" 
                         :disabled="form.processing"
-                        class="px-10 py-4 bg-white text-black font-black rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl disabled:opacity-50"
+                        class="px-8 py-3 bg-[#cc0000] text-white font-bold rounded-xl hover:bg-red-700 transition-all duration-300 shadow-lg disabled:opacity-50"
                     >
-                        {{ form.processing ? 'Mise Ã  jour...' : 'Mettre Ã  jour le film' }}
+                        {{ form.processing ? 'Mise à jour...' : 'Mettre à jour le film' }}
                     </button>
                 </div>
             </form>
         </div>
-    </AppLayout>
+    </div>
 </template>

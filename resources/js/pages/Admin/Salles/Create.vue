@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import adminRoutes from "@/routes/admin";
 import { Head, useForm, Link } from '@inertiajs/vue3';
@@ -22,49 +22,49 @@ const submit = () => {
 
 <template>
     <Head title="Ajouter une salle" />
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="p-8 max-w-2xl mx-auto">
-            <header class="mb-12 text-center">
-                <h1 class="text-4xl font-black text-white tracking-tighter mb-2">NOUVELLE SALLE</h1>
-                <p class="text-zinc-500 font-medium">Configurez une nouvelle salle de projection.</p>
+    <div class="py-10">
+        <div class="max-w-3xl mx-auto px-4 md:px-8">
+            <header class="mb-10 text-center">
+                <h1 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight font-cinzel uppercase">Nouvelle Salle</h1>
+                <p class="text-gray-500 dark:text-gray-400 font-medium mt-2">Configurez une nouvelle salle de projection.</p>
             </header>
 
-            <form @submit.prevent="submit" class="bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 p-10 rounded-[3rem] shadow-2xl space-y-8">
+            <form @submit.prevent="submit" class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 p-8 rounded-2xl shadow-md space-y-6">
                 <div>
-                    <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">Nom de la salle</label>
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Nom de la salle</label>
                     <input 
                         v-model="form.nom" 
                         type="text" 
-                        class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-5 text-white font-black text-2xl tracking-tight focus:border-red-600 focus:ring-0 transition-all placeholder:text-zinc-800"
+                        class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-gray-900 dark:text-white font-bold focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
                         placeholder="Ex: Salle IMAX"
                     />
                     <InputError :message="form.errors.nom" class="mt-2" />
                 </div>
 
                 <div>
-                    <label class="block text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-3 px-1">CapacitÃ© de siÃ¨ges</label>
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Capacité de sièges</label>
                     <input 
                         v-model="form.capacite" 
                         type="number" 
-                        class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-5 text-white font-black text-2xl tracking-tight focus:border-red-600 focus:ring-0 transition-all"
+                        class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-gray-900 dark:text-white font-bold focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
                     />
                     <InputError :message="form.errors.capacite" class="mt-2" />
-                    <p class="mt-3 text-zinc-600 text-xs font-bold italic px-1">Note : Les siÃ¨ges seront automatiquement gÃ©nÃ©rÃ©s lors de la crÃ©ation.</p>
+                    <p class="mt-2 text-gray-500 text-xs font-medium italic">Note : Les sièges seront automatiquement générés lors de la création.</p>
                 </div>
 
-                <div class="pt-8 flex gap-4">
-                    <Link :href="adminRoutes.salles.index().url" class="flex-1 py-5 bg-zinc-950 text-zinc-600 text-center font-black rounded-2xl hover:text-white transition-all border border-zinc-800">
+                <div class="pt-6 flex gap-4">
+                    <Link :href="adminRoutes.salles.index().url" class="flex-1 py-4 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-white text-center font-bold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-all">
                         Annuler
                     </Link>
                     <button 
                         type="submit" 
                         :disabled="form.processing"
-                        class="flex-[2] py-5 bg-white text-black font-black text-xl rounded-2xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-xl disabled:opacity-50"
+                        class="flex-[2] py-4 bg-[#cc0000] text-white font-bold text-lg rounded-xl hover:bg-red-700 transition-all duration-300 shadow-lg disabled:opacity-50"
                     >
-                        {{ form.processing ? 'CrÃ©ation...' : 'CrÃ©er la salle' }}
+                        {{ form.processing ? 'Création...' : 'Créer la salle' }}
                     </button>
                 </div>
             </form>
         </div>
-    </AppLayout>
+    </div>
 </template>
