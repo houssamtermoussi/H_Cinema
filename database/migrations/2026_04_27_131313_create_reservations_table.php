@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('seance_id')->constrained()->cascadeOnDelete();
             $table->integer('nombre_places');
-            $table->enum('statut', ['confirmée', 'annulée','en attente'])->default('en attente');
+            $table->enum('statut', ['confirmée', 'annulée', 'en attente'])->default('en attente');
             $table->timestamps();
 
             $table->index(['user_id', 'seance_id']);

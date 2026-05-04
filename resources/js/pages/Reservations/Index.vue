@@ -78,20 +78,24 @@ const formatDate = (dateString: string) => {
                                 <p class="text-zinc-600 text-[10px] font-black uppercase tracking-widest mb-1">Statut</p>
                                 <span 
                                     :class="[
-                                        res.statut === 'confirme' ? 'text-green-500 bg-green-500/5 border-green-500/20' : 'text-orange-500 bg-orange-500/5 border-orange-500/20'
+                                        res.statut === 'confirmée' ? 'text-green-500 bg-green-500/5 border-green-500/20' : 'text-orange-500 bg-orange-500/5 border-orange-500/20'
                                     ]"
                                     class="px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest border"
                                 >
-                                    {{ res.statut === 'confirme' ? 'Payé' : 'À régler' }}
+                                    {{ res.statut === 'confirmée' ? 'Payé' : 'À régler' }}
                                 </span>
                             </div>
                             
                             <div class="flex flex-col gap-3 min-w-[160px]">
-                                    :href="paiementRoutes.create(res.id)" 
+                                <Link 
+                                    v-if="res.statut !== 'confirmée'"
+                                    :href="paiementRoutes.create(res.id).url" 
                                     class="w-full py-3.5 bg-gray-900 dark:bg-[#cc0000] text-white text-center font-black rounded-2xl hover:bg-[#cc0000] dark:hover:bg-red-700 transition-all shadow-xl shadow-red-900/20 active:scale-95"
                                 >
                                     Payer maintenant
                                 </Link>
+                                <Link 
+                                    :href="reservationRoutes.show(res.id).url"
                                     class="w-full py-3.5 bg-white dark:bg-zinc-800 text-gray-900 dark:text-white text-center font-black rounded-2xl hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all active:scale-95 border border-gray-200 dark:border-zinc-700/50 shadow-sm"
                                 >
                                     Détails & Ticket

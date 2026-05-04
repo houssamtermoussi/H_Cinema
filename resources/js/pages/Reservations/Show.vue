@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 import { Head, Link } from '@inertiajs/vue3';
+import paiementRoutes from "@/routes/paiements";
+import reservationRoutes from "@/routes/reservations";
 
 const props = defineProps<{
     reservation: any;
@@ -104,10 +106,14 @@ const formatDate = (dateString: string) => {
                 
                 <!-- Actions -->
                 <div class="mt-16 flex flex-col sm:flex-row justify-center gap-6 no-print">
-                    <button onclick="window.print()" class="flex-1 px-8 py-5 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-gray-900 dark:text-white font-black rounded-2xl hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all flex items-center justify-center gap-3 shadow-xl">
+                    <button v-if="reservation.statut === 'confirmée'" onclick="window.print()" class="flex-1 px-8 py-5 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-gray-900 dark:text-white font-black rounded-2xl hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all flex items-center justify-center gap-3 shadow-xl">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2-2z" /></svg>
                         Imprimer mon billet
                     </button>
+                    <Link v-if="reservation.statut !== 'confirmée'" :href="paiementRoutes.create(reservation.id).url" class="flex-1 px-8 py-5 bg-[#cc0000] text-white font-black text-lg rounded-2xl hover:bg-red-700 transition-all duration-300 flex items-center justify-center gap-3 shadow-xl shadow-red-900/20">
+                         PROCEED TO PAYMENT
+                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                    </Link>
                     <Link href="/films" class="flex-1 px-8 py-5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-black text-lg rounded-2xl hover:bg-[#cc0000] dark:hover:bg-[#cc0000] hover:text-white dark:hover:text-white transition-all duration-300 flex items-center justify-center gap-3 shadow-xl">
                          Découvrir d'autres films
                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>

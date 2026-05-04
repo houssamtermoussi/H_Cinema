@@ -57,7 +57,7 @@ class PaiementController extends Controller
             ]
         );
 
-        return Inertia::location($checkout->getTargetUrl());
+        return Inertia::location($checkout->url);
     }
 
     /**

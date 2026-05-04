@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import paiementRoutes from "@/routes/paiements";
 
 const props = defineProps<{
     reservation: any;
@@ -16,7 +17,7 @@ const isProcessing = ref(false);
 
 const submit = () => {
     isProcessing.value = true;
-    router.post(route('paiements.store'), {
+    router.post(paiementRoutes.store().url, {
         reservation_id: props.reservation.id
     });
 };
