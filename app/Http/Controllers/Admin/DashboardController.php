@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function index(): Response
     {
         // 1. Revenus totaux
-        $totalRevenue = Paiement::where('statut', 'complete')->sum('montant');
+        $totalRevenue = Paiement::where('statut', 'payé')->sum('montant');
 
         // 2. Films les plus réservés
         $mostBookedFilms = Film::select('films.id', 'films.titre', 'films.affiche')
@@ -32,7 +32,7 @@ class DashboardController extends Controller
             ->get();
 
         // 3. Revenus par mois (12 derniers mois)
-        $revenueByMonth = Paiement::where('statut', 'complete')
+        $revenueByMonth = Paiement::where('statut', 'payé')
             ->selectRaw('SUM(montant) as total, DATE_FORMAT(created_at, "%Y-%m") as month')
             ->groupBy('month')
             ->orderBy('month', 'asc')

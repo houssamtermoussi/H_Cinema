@@ -6,7 +6,6 @@ use App\Models\Paiement;
 use App\Models\Reservation;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,7 +14,7 @@ class PaiementController extends Controller
     /**
      * Show the form for creating a new payment.
      */
-    public function create(Reservation $reservation): Response
+    public function create(Reservation $reservation): Response|RedirectResponse
     {
         // Ensure user owns the reservation and it's in a payable state
         if ($reservation->user_id !== auth()->id() || $reservation->statut === 'confirmée') {
@@ -47,10 +46,10 @@ class PaiementController extends Controller
 
         return $request->user()->checkoutCharge(
             $montant * 100,
-            "Réservation Cinema: " . $reservation->seance->film->titre,
+            'Réservation Cinema: '.$reservation->seance->film->titre,
             1,
             [
-                'success_url' => route('paiements.success', $reservation) . '?session_id={CHECKOUT_SESSION_ID}',
+                'success_url' => route('paiements.success', $reservation).'?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => route('paiements.cancel', $reservation),
                 'metadata' => [
                     'reservation_id' => $reservation->id,
@@ -72,7 +71,7 @@ class PaiementController extends Controller
                 [
                     'reservation_id' => $reservation->id,
                     'montant' => $reservation->seance->prix * $reservation->nombre_places,
-                    'statut' => 'complete',
+                    'statut' => 'payé',
                     'methode_paiement' => 'stripe',
                 ]
             );

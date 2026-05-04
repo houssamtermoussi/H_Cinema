@@ -21,16 +21,16 @@ class WebhookController extends CashierController
 
         if ($reservationId) {
             $reservation = Reservation::find($reservationId);
-            
+
             if ($reservation && $reservation->statut !== 'confirmée') {
                 $reservation->update(['statut' => 'confirmée']);
-                
+
                 Paiement::updateOrCreate(
                     ['stripe_session_id' => $session['id']],
                     [
                         'reservation_id' => $reservation->id,
                         'montant' => $session['amount_total'] / 100,
-                        'statut' => 'complete',
+                        'statut' => 'payé',
                         'methode_paiement' => 'stripe',
                     ]
                 );
