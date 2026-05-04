@@ -44,7 +44,7 @@ class PaiementController extends Controller
 
         $montant = $reservation->seance->prix * $reservation->nombre_places;
 
-        return $request->user()->checkoutCharge(
+        $checkout = $request->user()->checkoutCharge(
             $montant * 100,
             'Réservation Cinema: '.$reservation->seance->film->titre,
             1,
@@ -56,6 +56,8 @@ class PaiementController extends Controller
                 ],
             ]
         );
+
+        return Inertia::location($checkout->getTargetUrl());
     }
 
     /**
