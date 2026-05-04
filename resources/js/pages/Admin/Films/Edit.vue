@@ -27,7 +27,7 @@ const submit = () => {
     form.put(adminRoutes.films.update(props.film.id).url);
 };
 
-const types = ['Action', 'ComÃ©die', 'Drame', 'Horreur', 'Science-Fiction', 'Animation', 'Documentaire'];
+const types = ['Action', 'Comédie', 'Drame', 'Horreur', 'Science-Fiction', 'Animation', 'Documentaire'];
 </script>
 
 <template>
