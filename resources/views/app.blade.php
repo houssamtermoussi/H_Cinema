@@ -43,6 +43,17 @@
         </x-inertia::head>
     </head>
     <body class="font-sans antialiased">
+        <!-- Initial Cinema Curtain Placeholder (Prevents Flash of Content) -->
+        <div id="curtain-placeholder" style="position: fixed; inset: 0; z-index: 99999; display: flex; background: #000; pointer-events: none;">
+            <div style="width: 50.5%; height: 100%; background: #6b0000; box-shadow: 10px 0 30px rgba(0,0,0,0.5);"></div>
+            <div style="width: 50.5%; height: 100%; background: #6b0000; margin-left: -1%; box-shadow: -10px 0 30px rgba(0,0,0,0.5);"></div>
+        </div>
+        <script>
+            if (sessionStorage.getItem('curtainShown')) {
+                document.getElementById('curtain-placeholder').style.display = 'none';
+            }
+        </script>
+
         <x-inertia::app />
     </body>
 </html>

@@ -4,6 +4,7 @@ import { ref, watch } from 'vue';
 import { show as filmsShow } from '@/routes/films';
 import { home } from '@/routes';
 import GuestLayout from '@/layouts/GuestLayout.vue';
+import CinemaCurtain from '@/components/CinemaCurtain.vue';
 
 const props = defineProps<{
     canRegister: boolean;
@@ -35,6 +36,8 @@ watch(selectedCategory, (newCategory) => {
         <link rel="preconnect" href="https://fonts.gstatic.com" >
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     </Head>
+
+    <CinemaCurtain />
 
     <GuestLayout :search-query="filters.search">
         <div class="flex flex-col">
