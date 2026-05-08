@@ -19,7 +19,16 @@ class SeanceController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/Seances/Index', [
-            'seances' => Seance::with(['film', 'salle'])->latest()->get(),
+            'seances' => Seance::with(['film', 'salle'])
+                ->where(function ($query) {
+                    $query->where('date_seance', '>', now()->toDateString())
+                        ->orWhere(function ($query) {
+                            $query->where('date_seance', '=', now()->toDateString())
+                                ->where('heure_debut', '>=', now()->toTimeString());
+                        });
+                })
+                ->latest()
+                ->get(),
         ]);
     }
 

@@ -44,9 +44,9 @@
     </head>
     <body class="font-sans antialiased">
         <!-- Initial Cinema Curtain Placeholder (Prevents Flash of Content) -->
-        <div id="curtain-placeholder" style="position: fixed; inset: 0; z-index: 99999; display: flex; background: #000; pointer-events: none;">
-            <div style="width: 50.5%; height: 100%; background: #6b0000; box-shadow: 10px 0 30px rgba(0,0,0,0.5);"></div>
-            <div style="width: 50.5%; height: 100%; background: #6b0000; margin-left: -1%; box-shadow: -10px 0 30px rgba(0,0,0,0.5);"></div>
+        <div id="curtain-placeholder" style="position: fixed; inset: 0; z-index: 99999; background: #000; pointer-events: none; overflow: hidden;">
+            <div style="position: absolute; left: 0; width: 50.5%; height: 100%; background: #6b0000; background-image: repeating-linear-gradient(to right, #3a0000 0%, #6b0000 3%, #aa0000 6%, #e60000 8%, #aa0000 10%, #6b0000 13%, #3a0000 16%); box-shadow: 20px 0 50px rgba(0,0,0,0.5);"></div>
+            <div style="position: absolute; right: 0; width: 50.5%; height: 100%; background: #6b0000; background-image: repeating-linear-gradient(to right, #3a0000 0%, #6b0000 3%, #aa0000 6%, #e60000 8%, #aa0000 10%, #6b0000 13%, #3a0000 16%); box-shadow: -20px 0 50px rgba(0,0,0,0.5);"></div>
         </div>
         <script>
             if (sessionStorage.getItem('curtainShown')) {

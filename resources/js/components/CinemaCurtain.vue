@@ -1,7 +1,7 @@
 <template>
-    <div v-if="isVisible" class="cinema-curtain-container z-[100000] fixed inset-0 flex overflow-hidden pointer-events-none">
+    <div v-if="isVisible" class="cinema-curtain-container z-[100000] fixed inset-0 overflow-hidden pointer-events-none">
         <!-- Left Curtain -->
-        <div ref="leftCurtain" class="curtain left-curtain w-[50.1%] h-full origin-top-left relative pointer-events-auto shadow-[20px_0_50px_rgba(0,0,0,0.8)] mr-[-1px]">
+        <div ref="leftCurtain" class="curtain left-curtain absolute left-0 w-[50.5%] h-full origin-top-left pointer-events-auto shadow-[20px_0_50px_rgba(0,0,0,0.8)]">
             <!-- Base folds -->
             <div class="absolute inset-0 curtain-folds"></div>
             <!-- Dynamic shadows/highlights -->
@@ -11,7 +11,7 @@
         </div>
         
         <!-- Right Curtain -->
-        <div ref="rightCurtain" class="curtain right-curtain w-[50.1%] h-full origin-top-right relative pointer-events-auto shadow-[-20px_0_50px_rgba(0,0,0,0.8)] ml-[-1px]">
+        <div ref="rightCurtain" class="curtain right-curtain absolute right-0 w-[50.5%] h-full origin-top-right pointer-events-auto shadow-[-20px_0_50px_rgba(0,0,0,0.8)]">
             <!-- Base folds -->
             <div class="absolute inset-0 curtain-folds"></div>
             <!-- Dynamic shadows/highlights -->
@@ -72,7 +72,7 @@ onMounted(() => {
         scaleX: 0,
         skewX: -2,
         skewY: 1,
-        duration: 3.5,
+        duration: 1.5,
         ease: "power2.inOut"
     }, "open");
 
@@ -80,7 +80,7 @@ onMounted(() => {
         scaleX: 0,
         skewX: 2,
         skewY: -1,
-        duration: 3.5,
+        duration: 1.5,
         ease: "power2.inOut"
     }, "open");
 });
